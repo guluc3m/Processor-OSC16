@@ -1,0 +1,15 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity cpu is
+	port();
+end cpu;
+
+architecture Behavioral of cpu is
+begin
+--Microcode entity
+--Alu entity
+--Secondary clk processes
+--Bus process
+--Main clk process
+end Behavioral;

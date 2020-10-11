@@ -3,14 +3,14 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 --Definition if the entity
-entity Computer16Bit is
+entity Processor16Bits is
 	port(
 		clk: in std_logic;
 		rst: in std_logic);
-end Computer16Bit;
+end Processor16Bits;
 
 --Architecture
-architecture Behavioral of Computer16Bit is
+architecture Behavioral of Processor16Bits is
 begin
 
 --cpu : entity work.cpu

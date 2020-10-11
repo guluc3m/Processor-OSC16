@@ -1,0 +1,1 @@
+The PS2 Driver along with the rest of the processor components, must me merged to the Processor Folder when finished to be able to upload the complete code to the FPGA

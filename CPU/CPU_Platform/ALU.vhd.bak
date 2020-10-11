@@ -1,0 +1,228 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use work.Constants.all;
+
+entity ALU is
+	port(
+		clk: in std_logic;
+		rst: in std_logic;
+
+		Op: in std_logic_vector(3 downto 0); --Operator selector
+		A: in std_logic_vector(15 downto 0); --A operand
+		B: in std_logic_vector(15 downto 0); --B operand
+		FR_I: in std_logic_vector(7 downto 0); --Flag register in
+		FR_O: out std_logic_vector(7 downto 0); --Flag register out);
+		Q: out std_logic_vector(15 downto 0) --Output
+end ALU;
+
+architecture Behavioral of ALU is
+
+	-- AddSub variables (temporary signals)
+	--The addition and subtrtaction is going to be done asyncrcorous, and saved onto the Q syncronously
+	signal ADC_Z: std_logic; --Adder zero flag
+	signal ADC_C: std_logic; --Adder carry flag
+	signal ADC_V: std_logic; --Adder overflow flag
+	signal ADC_N: std_logic; --Adder negative flag
+	signal ADC_P: std_logic; --Adder parity flag
+	signal ADC_Q: std_logic_vector(15 downto 0); --Adder result
+
+	signal SBC_Z: std_logic; --Substracter zero flag
+	signal SBC_C: std_logic; --Substracter carry flag
+	signal SBC_V: std_logic; --Substracter overflow flag
+	signal SBC_N: std_logic; --Substracter negative flag
+	signal SBC_P: std_logic; --Substracter parity flag
+	signal SBC_Q: std_logic_vector(15 downto 0); --Substracter result
+begin
+	
+	--Addition process
+	addition : process(FR_I, A, B)
+		variable AdditionResult: signed(16 downto 0);
+	begin
+
+		--Checking the sign flag, to select if the operation is going to be done using sign or not
+		if FR_I(Flag_S) = '1' then
+			AdditionResult = signed(A) + signed(B);
+		else
+			AdditionResult = unsigned(A) + unsigned(B);
+		end if;
+
+		-- pragma translate_off
+			if is_x(std_logic_vector(AdditionResult)) then AdditionResult := (others => '0'); end if; --Testing if std_logic_vector is 'X'
+		-- pragma translate_on
+
+		--Checking carry flag
+		ADC_C <= AdditionResult(16);
+
+		--Checking zero flag
+		if AdditionResult(15 downto 0) = 0 then
+			ADC_Z <= '1';
+		else
+			ADC_Z <= '0';
+		end if;
+
+		--Checking negative flag
+		if FR_I(Flag_S) = '1' then
+			ADC_N <= AdditionResult(15);
+		else
+			ADC_N <= '0';
+		end if;
+
+		--Checking overflow flag
+		if FR_I(Flag_S) = '1' then
+			ADC_V <= (AdditionResult(15) xor A(15)) and not (A(15) xor B(15));
+		else
+			ADC_V <= '0';
+		end if;
+
+		--Checking parity flag
+		ADC_F <= xor AdditionResult(15 downto 0);
+
+		--Saving the result of the operation
+		ADC_Q <= AdditionResult(15 downto 0);
+	end process;
+
+	--Substraction process
+	substraction : process(FR_I, A, B)
+		variable SubstractionResult: signed(16 downto 0);
+	begin
+		if FR_I(Flag_S) = '1' then
+			SubstractionResult = signed(A) - signed(B);
+		else
+			SubstractionResult = unsigned(A) - unsigned(B);
+		end if;
+
+		-- pragma translate_off
+			if is_x(std_logic_vector(SubstractionResult)) then SubstractionResult := (others => '0'); end if; --Testing if std_logic_vector is 'X'
+		-- pragma translate_on
+
+		--Checking carry flag
+		SBC_C <= SubstractionResult(16);
+
+		--Checking zero flag
+		if SubstractionResult(15 downto 0) = 0 then
+			SBC_Z <= '1';
+		else
+			SBC_Z <= '0';
+		end if;
+
+		--Checking negative flag
+		SBC_N <= SubstractionResult(15);
+
+		--Checking overflow flag
+		SBC_V <= (SubstractionResult(15) xor A(15)) and not (A(15) xor B(15));
+
+		--Checking parity flag
+		SBC_F <= xor SubstractionResult;
+	end process;
+
+	--General process
+	AluMain : process(Op, FR_I, A, B,
+			ADC_Z, ADC_C, ADC_V, ADC_N, ADC_Q,
+			SBC_Z, SBC_C, SBC_V, SBC_N, SBC_Q)
+
+		variable Q_t : std_logic_vector(16 downto 0);
+	begin
+		FR_O <= FR_I;
+
+		--Setting Q_t, carry and overflow flags
+		case(Op) is
+		when "0000" => --Or
+			Q_t <= '0' & (A or B);
+
+		when "0001" => --And
+			Q_t <= '0' & (A and B);
+
+		when "0010" => --Xor
+			Q_t <= '0' & (A xor B);
+
+		when "0011" => --Shift right with 0 bit
+			Q_t <= A(0) & '0' & A(15 downto 1);
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+			end if;
+
+		when "0100" => --Shift right with first bit
+			Q_t <= '0' & A(0) & A(15 downto 1);
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+			end if;
+
+		when "0101" => --Shift left with 0 bit
+			Q_t <= A(15 downto 0) & '0';
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+			end if;
+
+		when "0110" => --Shift left with last bit
+			Q_t <= '0' & A(14 downto 0) & A(15);
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+			end if;
+
+		when "0111" => --Add 1 to A
+			if FR_I(Flag_S) = '1' then
+				Q_t <= std_logic_vector(signed(A) + 1);
+			else
+				Q_t <= std_logic_vector(unsigned(A) + 1);
+			end if;
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+				FR_O(Flag_V) <= Q_t(16);
+			end if;
+
+		when "1000" => --Add B to A
+			Q_t <= '0' & ADC_Q;
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= ADC_C;
+				FR_O(Flag_V) <= ADC_V;
+			end if;
+
+		when "1001" => --Substract 1 from A
+			if FR_I(Flag_S) = '1' then
+				Q_t <= std_logic_vector(signed(A) - 1);
+			else
+				Q_t <= std_logic_vector(unsigned(A) - 1);
+			end if;
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= Q_t(16);
+				FR_O(Flag_V) <= (SubstractionResult(15) xor A(15)) and not (A(15) xor B(15));
+			end if;
+
+		when "1010" => --Substract B from A
+			Q_t <= '0' & SBC_Q;
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_C) <= SBC_C;
+				FR_O(Flag_V) <= SBC_V;
+			end if;
+
+		when others => Q_t <= '0' & A;
+		end case;
+
+		--Setting the rest of the flags
+		case(Op) then
+		when "1000" =>
+			P_Out(Flag_N) <= ADC_N;
+			P_Out(Flag_Z) <= ADC_Z;
+		when "1010" =>
+			P_Out(Flag_N) <= SBC_N;
+			P_Out(Flag_Z) <= SBC_Z;
+		when others =>
+
+			--Checking zero flag
+			if FR_I(Flag_F) = '1' then
+				if Q_t(15 downto 0) = 0 then
+					FR_O(Flag_Z) <= '1';
+				else
+					FR_O(Flag_Z) <= '0';
+				end if;
+			end if;
+
+			--Checking parity flag
+			if FR_I(Flag_F) = '1' then
+				FR_O(Flag_P) <= xor Q_t;
+			end if;
+		end case;
+	end process;
+
+end Behavioral;

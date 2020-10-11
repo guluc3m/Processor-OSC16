@@ -1,0 +1,110 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity MCode is
+	port(
+		--Direct instruccion control
+		CIR       : in std_logic;
+		IR        : in std_logic_vector(15 downto 0);
+		MRC       : in std_logic_vector(3 downto 0);
+		IC        : in std_logic_vector(2 downto 0);
+		FR        : in std_logic_vector(15 downto 0);
+		LMRC      : out std_logic_vector(3 downto 0);
+		LIC       : out std_logic_vector(2 downto 0);
+
+		--Indirect instruccion control
+		IR_in     : out std_logic; -- {DataBus => IR}
+		PCd_in    : out std_logic; -- {DataBus => PC}
+		PCa_in    : out std_logic; -- {AddressBus => PC}
+		PC_inc    : out std_logic; -- {PC++}
+
+		--Clock control
+		Halt      : out std_logic;
+
+		--Bus control
+		Set_D     : out std_logic_vector(4 downto 0);
+		Set_A     : out std_logic_vector(3 downto 0);
+		Set_S     : out std_logic_vector(2 downto 0);
+
+		--Alu/Add control
+		ALUOp     : out std_logic_vector(3 downto 0);
+		Add_Srl8  : out std_logic;
+
+		--Alu/Add input control
+		A_in      : out std_logic; -- {DataBus => A}
+		B_in      : out std_logic; -- {DataBus => B}
+		Cd_in     : out std_logic; -- {DataBus => C(15 downto 0)}
+		Cs_in     : out std_logic; -- {SegmentBus => C}
+		Ca_in     : out std_logic; -- {AddressBus => C}
+		Dd_in     : out std_logic; -- {DataBus => D(15 downto 0)}
+		Dh_in     : out std_logic; -- {C(15 downto 8) => D(7 downto 0) && '0' => D(23 downto 8)}
+		Da_in     : out std_logic; -- {AddressBus => D}
+
+		--General purpose register control
+		X_in      : out std_logic; -- {DataBus => X}
+		XH_in     : out std_logic; -- {DataBus(7 downto 0) => X(15 downto 8)}
+		XL_in     : out std_logic; -- {DataBus(7 downto 0) => X(7 downto 0)}
+		Y_in      : out std_logic; -- {DataBus => Y}
+		YH_in     : out std_logic; -- {DataBus(7 downto 0) => Y(15 downto 8)}
+		YL_in     : out std_logic; -- {DataBus(7 downto 0) => Y(7 downto 0)}
+		Z_in      : out std_logic; -- {DataBus => Z}
+		ZH_in     : out std_logic; -- {DataBus(7 downto 0) => Z(15 downto 8)}
+		ZL_in     : out std_logic; -- {DataBus(7 downto 0) => Z(7 downto 0)}
+		Z_inc_dec : out std_logic; -- 0=Inc, 1=Dec
+		Z_inc     : out std_logic; -- {If Z_inc_dec: Z-- else: Z++}
+		ZH_inc    : out std_logic; -- {If Z_inc_dec: Z(15 downto 8)-- else: Z(15 downto 8)++}
+		ZL_inc    : out std_logic; -- {If Z_inc_dec: Z(7 downto 0)-- else: Z(7 downto 0)++}
+
+		--Stack registers control
+		SPd_in    : out std_logic; -- {DataBus => SP(15 downto 0)}
+		SPa_in    : out std_logic; -- {AddressBus => SP}
+		SP_inc    : out std_logic; -- {SP++}
+		SP_dec    : out std_logic; -- {SP--}
+		BPd_in    : out std_logic; -- {DataBus => BP(15 downto 0)}
+		BPa_in    : out std_logic; -- {AddressBus => BP}
+
+		--Index registers control
+		SId_in    : out std_logic; -- {DataBus => SI(15 downto 0)}
+		SIa_in    : out std_logic; -- {AddressBus => SI}
+		DId_in    : out std_logic; -- {DataBus => DI(15 downto 0)}
+		DIa_in    : out std_logic; -- {AddressBus => DI}
+
+		--Segment registers control
+		CSd_in    : out std_logic; -- {DataBus => CS(15 downto 0)}
+		CSa_in    : out std_logic; -- {AddressBus => CS}
+		DSd_in    : out std_logic; -- {DataBus => DS(15 downto 0)}
+		DSa_in    : out std_logic; -- {AddressBus => DS}
+		ESd_in    : out std_logic; -- {DataBus => ES(15 downto 0)}
+		ESa_in    : out std_logic; -- {AddressBus => ES}
+		FSd_in    : out std_logic; -- {DataBus => FS(15 downto 0)}
+		FSa_in    : out std_logic; -- {AddressBus => FS}
+		GSd_in    : out std_logic; -- {DataBus => GS(15 downto 0)}
+		GSa_in    : out std_logic; -- {AddressBus => GS}
+		SSd_in    : out std_logic; -- {DataBus => SS(15 downto 0)}
+		SSa_in    : out std_logic; -- {AddressBus => SS}
+
+		--I/O control
+		DR_E      : out std_logic; -- {If Write: Data => DR else: DR => Data}
+		DRd_in    : out std_logic; -- {DataBus => DR}
+		AR_E      : out std_logic; -- {AR => Address}
+		ARa_in    : out std_logic; -- {AddressBus => AR}
+		Write     : out std_logic;
+
+		--Interrupt control
+		HPIA_in   : out std_logic; -- {AddressBus => HPIA}
+		MPIA_in   : out std_logic; -- {AddressBus => MPIA}
+		LPIA_in   : out std_logic; -- {AddressBus => LPIA}
+		AIE       : in std_logic_vector(1 downto 0);
+		LIF       : out std_logic;
+end MCode;
+
+architecture Behavioral of MCode is
+begin
+--Decodification of the microcode
+	--Ways of obtainig the data
+		--Inmmediate (Given by the instruccion itself)
+		--Register direct (By selecting the register where the data is stored)
+		--Memory direct (By giving the memory direction)
+		--Indirect (By giving the register that haves the address to read the data) (To be seen)
+--Decodification of the alu operation
+end Behavioral;
