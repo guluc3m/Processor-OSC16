@@ -1,0 +1,153 @@
+	when x"02" =>
+		--Test reflect, PASSED
+		LMRC <= "0101";
+		case MRC is
+		when x"0" =>
+			LIC <= "11";
+		when x"1" =>
+			--Exporting the address located in EIR(23 downto 0) to later obtain the data
+			Set_A <= "1100";
+			AE <= '1';
+		when x"2" =>
+			--Reading the data, and saving it onto the X register
+			DE <= '1';
+			Set_D <= "11100";
+			X_in <= '1';
+		when x"3" =>
+			--Exporting the address located in EIR(47 downto 24) to later export the data
+			Set_A <= "1101";
+			AE <= '1';
+		when x"4" =>
+			--Writing the X register
+			Write <= '1';
+			Set_D <= "00111";
+			DE <= '1';
+		when others =>
+		end case;
+
+	when x"03" =>
+		--Test all ALU operations, PASSED
+		LMRC <= "0110";
+		case MRC is
+		when x"0" =>
+			LIC <= "11";
+		when x"1" =>
+			--Exporting the address located in EIR(23 downto 0) to later obtain the first operand
+			Set_A <= "1100";
+			AE <= '1';
+		when x"2" =>
+			--Saving the first operand into A
+			DE <= '1';
+			Set_D <= "11100";
+			Ad_in <= '1';
+		when x"3" =>
+			--Exporting the address located in EIR(47 downto 24) to later obtain the second operand
+			Set_A <= "1101";
+			AE <= '1';
+		when x"4" =>
+			--Saving the second operand into B
+			DE <= '1';
+			Set_D <= "11100";
+			Bd_in <= '1';
+			--Configuring the alu to realize the operation
+			ALUOpL <= '0'; --16bit operation
+			ALUOp <= "1010";
+			--Exporting the address stored in EIR(47 downto 24) to later push the result of the operation
+			Set_A <= "1101";
+			AE <= '1';
+		when x"5" =>
+			--Moving the result of the operation that is stored in b to the data bus
+			Set_D <= "00100";
+			--Writting the result to the data output
+			Write <= '1';
+			DE <= '1';
+		when others =>
+		end case;
+
+	when x"04" =>
+		--Test moving trought all registers to test correct comunication, PASSED
+		LMRC <= "0111";
+		case MRC is
+		when x"0" =>
+			LIC <= "01";
+		when x"1" =>
+			--Moving the data fixed from EIR(15 downto 0) to X register
+			Set_D <= "11010";
+			X_in <= '1';
+		when x"2" =>
+			--Moving the data from X to Y register
+			Set_D <= "00111";
+			Y_in <= '1';
+		when x"3" =>
+			--Moving the data from Y to Z register
+			Set_D <= "01010";
+			Z_in <= '1';
+		when x"4" =>
+			--Moving the data from Z to A register
+			Set_D <= "01101";
+			Ad_in <= '1';
+			--Incrementing the program counter
+			PC_inc <= '1';
+		when x"5" =>
+			--Moving the data from A to B register
+			Set_D <= "00010";
+			Bd_in <= '1';
+			--Exporting the address stored in PC to later push the result of the operation
+			Set_A <= "0001";
+			AE <= '1';
+		when x"6" =>
+			--Writting the result to the data output
+			Write <= '1';
+			Set_D <= "00011";
+			DE <= '1';
+		when others =>
+		end case;
+
+	when x"05" =>
+		--Test moving data operating with segment registers, PASSED
+		LMRC <= "1000";
+		case MRC is
+		when x"0" =>
+			LIC <= "11";
+		when x"1" =>
+			--Moving the EIR(23 downto 0) to the A register and moving the segment bus into the B register
+			Set_A <= "1100";
+			Aa_in <= '1';
+			Bs_in <= '1';
+		when x"2" =>
+			--Configuring the alu to realize the operation
+			ALUOpL <= '1'; --24bit operation
+			ALUOp <= "1010";
+			--Moving the result of the operation from the alu to SI
+			Set_A <= "0100";
+			SIa_in <= '1';
+		when x"3" =>
+			--Moving the EIR(47 downto 24) into the A register
+			Set_A <= "1101";
+			Aa_in <= '1';
+		when x"4" =>
+			--Configuring the alu to realize the operation
+			ALUOpL <= '1'; --24bit operation
+			ALUOp <= "1010";
+			--Moving the result of the operation from the alu to DI
+			Set_A <= "0100";
+			DIa_in <= '1';
+		when x"5" =>
+			--Exporting the address located in SI to later obtain the data
+			Set_A <= "0111";
+			AE <= '1';
+		when x"6" =>
+			--Reading the data, and saving it onto the X register
+			DE <= '1';
+			Set_D <= "11100";
+			X_in <= '1';
+			--Exporting the address located in DI to later push the data
+			Set_A <= "1000";
+			AE <= '1';
+		when x"7" =>
+			--Writting the X register to the data output
+			Write <= '1';
+			Set_D <= "00111";
+			DE <= '1';
+		when others =>
+		end case;

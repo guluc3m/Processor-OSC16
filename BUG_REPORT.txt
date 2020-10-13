@@ -1,0 +1,7 @@
+
+--BUG REPORT--
+--- DATE ---- LOCATION ---- BUG SUMMARY --------------------------------------------------------------------------------------------------------------------------------------
+#0  Unknown   Processor     The LMRC must no be set with a value below 0b10.
+#1  Unknown   Processor     The last cycle of a micorinstruction can not export data.
+#2  Unknown   Processor     Not save PC in the stack in the first or second cycle.
+#3  14/10/20  Processor     Address reading clock syncronization not solved, now it is dependent on the RAM clock speed to be sufficient to equparate to the FPGA clock speed.

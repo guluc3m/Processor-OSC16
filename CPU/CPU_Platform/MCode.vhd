@@ -203,409 +203,728 @@ begin
 
 			case IR(7 downto 0) is
 			when x"00" =>
-				--NOP
-				LMRC <= "0001";
-				case MRC is
-				when x"0" =>
-					LIC <= "01";
-				when others =>
-				end case;
-
-			when x"86" =>
-				--adds
-				LMRC <= "0001";
-				case MRC is
-				when x"0" =>
-					LIC <= "00";
-				when x"1" =>
-					Set_D <= IR(12 downto 8); --Fijar Set_D igual que el orden de los registros
-				when x"2" =>
-
-				when others =>
-				end case;
-
-			when x"45" =>
-				--BRK (To define)
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					--Arguments_Type <= ;
-					LIC <= "01";
-				when x"1" =>
+					LIC <= "00";
 				when others =>
 				end case;
 
 			when x"01" =>
-				--RSTO (To define)
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "11";
+					LIC <= "00";
 				when x"1" =>
 				when others =>
 				end case;
 
 			when x"02" =>
-				--Test reflect, PASSED
-				LMRC <= "0101";
-				case MRC is
-				when x"0" =>
-					LIC <= "11";
-				when x"1" =>
-					--Exporting the address located in EIR(23 downto 0) to later obtain the data
-					Set_A <= "1100";
-					AE <= '1';
-				when x"2" =>
-					--Reading the data, and saving it onto the X register
-					DE <= '1';
-					Set_D <= "11100";
-					X_in <= '1';
-				when x"3" =>
-					--Exporting the address located in EIR(47 downto 24) to later export the data
-					Set_A <= "1101";
-					AE <= '1';
-				when x"4" =>
-					--Writing the X register
-					Write <= '1';
-					Set_D <= "00111";
-					DE <= '1';
-				when others =>
-				end case;
-
-			when x"03" =>
-				--Test all ALU operations, PASSED
-				LMRC <= "0110";
-				case MRC is
-				when x"0" =>
-					LIC <= "11";
-				when x"1" =>
-					--Exporting the address located in EIR(23 downto 0) to later obtain the first operand
-					Set_A <= "1100";
-					AE <= '1';
-				when x"2" =>
-					--Saving the first operand into A
-					DE <= '1';
-					Set_D <= "11100";
-					Ad_in <= '1';
-				when x"3" =>
-					--Exporting the address located in EIR(47 downto 24) to later obtain the second operand
-					Set_A <= "1101";
-					AE <= '1';
-				when x"4" =>
-					--Saving the second operand into B
-					DE <= '1';
-					Set_D <= "11100";
-					Bd_in <= '1';
-					--Configuring the alu to realize the operation
-					ALUOpL <= '0'; --16bit operation
-					ALUOp <= "1010";
-					--Exporting the address stored in EIR(47 downto 24) to later push the result of the operation
-					Set_A <= "1101";
-					AE <= '1';
-				when x"5" =>
-					--Moving the result of the operation that is stored in b to the data bus
-					Set_D <= "00100";
-					--Writting the result to the data output
-					Write <= '1';
-					DE <= '1';
-				when others =>
-				end case;
-
-			when x"04" =>
-				--Test moving trought all registers to test correct comunication, PASSED
-				LMRC <= "0111";
-				case MRC is
-				when x"0" =>
-					LIC <= "01";
-				when x"1" =>
-					--Moving the data fixed from EIR(15 downto 0) to X register
-					Set_D <= "11010";
-					X_in <= '1';
-				when x"2" =>
-					--Moving the data from X to Y register
-					Set_D <= "00111";
-					Y_in <= '1';
-				when x"3" =>
-					--Moving the data from Y to Z register
-					Set_D <= "01010";
-					Z_in <= '1';
-				when x"4" =>
-					--Moving the data from Z to A register
-					Set_D <= "01101";
-					Ad_in <= '1';
-					--Incrementing the program counter
-					PC_inc <= '1';
-				when x"5" =>
-					--Moving the data from A to B register
-					Set_D <= "00010";
-					Bd_in <= '1';
-					--Exporting the address stored in PC to later push the result of the operation
-					Set_A <= "0001";
-					AE <= '1';
-				when x"6" =>
-					--Writting the result to the data output
-					Write <= '1';
-					Set_D <= "00011";
-					DE <= '1';
-				when others =>
-				end case;
-
-			when x"05" =>
-				--Test moving data operating with segment registers, PASSED
-				LMRC <= "1000";
-				case MRC is
-				when x"0" =>
-					LIC <= "11";
-				when x"1" =>
-					--Moving the EIR(23 downto 0) to the A register and moving the segment bus into the B register
-					Set_A <= "1100";
-					Aa_in <= '1';
-					Bs_in <= '1';
-				when x"2" =>
-					--Configuring the alu to realize the operation
-					ALUOpL <= '1'; --24bit operation
-					ALUOp <= "1010";
-					--Moving the result of the operation from the alu to SI
-					Set_A <= "0100";
-					SIa_in <= '1';
-				when x"3" =>
-					--Moving the EIR(47 downto 24) into the A register
-					Set_A <= "1101";
-					Aa_in <= '1';
-				when x"4" =>
-					--Configuring the alu to realize the operation
-					ALUOpL <= '1'; --24bit operation
-					ALUOp <= "1010";
-					--Moving the result of the operation from the alu to DI
-					Set_A <= "0100";
-					DIa_in <= '1';
-				when x"5" =>
-					--Exporting the address located in SI to later obtain the data
-					Set_A <= "0111";
-					AE <= '1';
-				when x"6" =>
-					--Reading the data, and saving it onto the X register
-					DE <= '1';
-					Set_D <= "11100";
-					X_in <= '1';
-					--Exporting the address located in DI to later push the data
-					Set_A <= "1000";
-					AE <= '1';
-				when x"7" =>
-					--Writting the X register to the data output
-					Write <= '1';
-					Set_D <= "00111";
-					DE <= '1';
-				when others =>
-				end case;
-
-			when x"06" =>
-				--Halt WIP
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
 					LIC <= "00";
 				when x"1" =>
-					Halt <= '1';
+				when others =>
+				end case;
+
+			when x"03" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"04" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"05" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"06" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
 				when others =>
 				end case;
 
 			when x"07" =>
-				--Jump
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
-				when x"1" =>
-					Set_A <= "1100";
-					PCa_in <= '1';
+					LIC <= "00";
 				when others =>
 				end case;
 
 			when x"08" =>
-				--Jump if carry
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_C) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"09" =>
-				--Jump if overflow
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_V) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0A" =>
-				--Jump if parity
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_P) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0B" =>
-				--Jump if auxiliary carry
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_A) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0C" =>
-				--Jump if zero
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_Z) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0D" =>
-				--Jump if negative
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_N) = '1' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0E" =>
-				--Jump if not carry
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_C) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"0F" =>
-				--Jump if not overflow
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_V) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"10" =>
-				--Jump if not parity
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
-				when x"1" =>
-					if FR(Flag_P) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
+					LIC <= "00";
 				when others =>
 				end case;
 
 			when x"11" =>
-				--Jump if not auxiliary carry
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_A) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"12" =>
-				--Jump if not zero
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_Z) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"13" =>
-				--Jump if not negative
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "10";
+					LIC <= "00";
 				when x"1" =>
-					if FR(Flag_N) = '0' then
-						Set_A <= "1100";
-						PCa_in <= '1';
-					end if;
 				when others =>
 				end case;
 
 			when x"14" =>
-				--Load register with inmmediate
+				--
 				LMRC <= "0010";
 				case MRC is
 				when x"0" =>
-					LIC <= "01";
+					LIC <= "00";
 				when x"1" =>
-					Set_D <= "11010";
-					--case IR(16 downto 11) is
-					--when x"0" =>
+				when others =>
+				end case;
+
+			when x"15" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"16" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"17" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"18" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"19" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1A" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1B" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1C" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1D" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1E" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"1F" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"20" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"21" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"22" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"23" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"24" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"25" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"26" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"27" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"28" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"29" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2A" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2B" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2C" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2D" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2E" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"2F" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"30" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"31" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"32" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"33" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"34" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"35" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"36" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"37" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"38" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"39" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3A" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3B" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3C" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3D" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3E" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"3F" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"40" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"41" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"42" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"43" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"44" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"45" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"46" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
+				when others =>
+				end case;
+
+			when x"47" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when others =>
+				end case;
+
+			when x"48" =>
+				--
+				LMRC <= "0010";
+				case MRC is
+				when x"0" =>
+					LIC <= "00";
+				when x"1" =>
 				when others =>
 				end case;
 
 			when others =>
 				--Not defined instruction
-				LMRC <= "1111";
+				LMRC <= "1111"; --To be able to easily identify this instruction being executed
 				case MRC is
 				when  x"0" =>
 					LIC <= "11";

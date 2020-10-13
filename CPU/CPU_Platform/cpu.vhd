@@ -90,7 +90,7 @@ entity cpu is
 		--Data and Address bus
 		Address: out std_logic_vector(23 downto 0); --To be seen
 		Data: inout std_logic_vector(15 downto 0); --Pretty sure to keep like that
-		--DataO: out std_logic_vector(15 downto 0); --For displaying tests on the simulator
+		DataO: out std_logic_vector(15 downto 0); --For displaying tests on the simulator, Enable for simulation
 
 		--Tests points
 		--IC_Test: out std_logic_vector(1 downto 0);
@@ -1230,7 +1230,8 @@ begin
 	end process;
 
 	--Writting the data out in the Data asyncronously
-	Data <= data_out when (RW_R = '1') else (others => 'Z');
+	--Data <= data_out when (RW_R = '1') else (others => 'Z'); --Disable for simulation
+	DataO <= data_out when (RW_R = '1') else (others => 'Z'); --Enable for simulation
 
 	--Updating the RW pin with the RW register asyncronously
 	RW <= RW_R;
