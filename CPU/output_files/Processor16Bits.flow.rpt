@@ -1,5 +1,5 @@
 Flow report for Processor16Bits
-Sun Oct 11 02:08:51 2020
+Tue Oct 13 22:32:38 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Oct 11 02:08:51 2020       ;
+; Flow Status                        ; Successful - Tue Oct 13 22:32:38 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Processor16Bits                             ;
 ; Top-level Entity Name              ; cpu                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 887 / 6,272 ( 14 % )                        ;
-;     Total combinational functions  ; 850 / 6,272 ( 14 % )                        ;
-;     Dedicated logic registers      ; 313 / 6,272 ( 5 % )                         ;
-; Total registers                    ; 313                                         ;
+; Total logic elements               ; 667 / 6,272 ( 11 % )                        ;
+;     Total combinational functions  ; 622 / 6,272 ( 10 % )                        ;
+;     Dedicated logic registers      ; 262 / 6,272 ( 4 % )                         ;
+; Total registers                    ; 262                                         ;
 ; Total pins                         ; 49 / 92 ( 53 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 1,024 / 276,480 ( < 1 % )                   ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/11/2020 02:07:59 ;
+; Start date & time ; 10/13/2020 22:31:25 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Processor16Bits     ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+-----------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value   ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+-----------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 134660533545189.160237487908344        ; --              ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 134660533545189.160262108511644        ; --              ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                   ; --              ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                 ; <None>          ; --          ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --              ; --          ; eda_simulation ;
@@ -99,12 +99,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:22     ; 1.0                     ; 4798 MB             ; 00:00:41                           ;
-; Fitter               ; 00:00:14     ; 1.0                     ; 5147 MB             ; 00:00:16                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4664 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:05     ; 1.0                     ; 4724 MB             ; 00:00:04                           ;
+; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4793 MB             ; 00:00:38                           ;
+; Fitter               ; 00:00:23     ; 1.0                     ; 5148 MB             ; 00:00:14                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 4667 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:07     ; 1.0                     ; 4722 MB             ; 00:00:03                           ;
 ; EDA Netlist Writer   ; 00:00:03     ; 1.0                     ; 4646 MB             ; 00:00:03                           ;
-; Total                ; 00:00:46     ; --                      ; --                  ; 00:01:05                           ;
+; Total                ; 00:01:03     ; --                      ; --                  ; 00:00:59                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

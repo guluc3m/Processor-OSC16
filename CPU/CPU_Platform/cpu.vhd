@@ -100,6 +100,8 @@ entity cpu is
 		--A_B_Test: out std_logic_vector(23 downto 0);
 		--A_Test: out std_logic_vector(15 downto 0);
 		--B_Test: out std_logic_vector(15 downto 0);
+		--EA_Tests: out std_logic_vector(15 downto 0); --TODO to implement
+		--EB_Tests: out std_logic_vector(15 downto 0); --TODO to implement
 		--AIE_Test: out std_logic_vector(1 downto 0);
 		--AluOperation_Test: out std_logic_vector(3 downto 0);
 		--AluOperationLenght_Test: out std_logic;
@@ -126,187 +128,192 @@ end cpu;
 
 architecture Behavioral of cpu is
 
-	--GENERAL PURPOSE REGISTERS--
+	--REGISTERS
 
-	--General purpose X register. XL, XH can be accesed
-	signal X: std_logic_vector(15 downto 0);
+		--GENERAL PURPOSE REGISTERS--
 
-	--General purpose Y register. YL, YH can be accesed
-	signal Y: std_logic_vector(15 downto 0);
+		--General purpose X register. XL, XH can be accesed
+		signal X: std_logic_vector(15 downto 0);
 
-	--General purpose Z register. ZL, ZH can be accesed
-	signal Z: std_logic_vector(15 downto 0);
+		--General purpose Y register. YL, YH can be accesed
+		signal Y: std_logic_vector(15 downto 0);
 
+		--General purpose Z register. ZL, ZH can be accesed
+		signal Z: std_logic_vector(15 downto 0);
 
 
-	--ALU REGISTERS--
 
-	--Registers A and B. Both two registers are used to operate in the ALU, stacked in one register.
-	--The order is 0-23(A), 24-47(B)
-	signal AB: std_logic_vector(47 downto 0);
+		--ALU REGISTERS--
 
-	--Alu new flag register, chnged after doing each operation if Flag_F is actived
-	signal FR_Out: std_logic_vector(15 downto 0);
+		--Registers A and B. Both two registers are used to operate in the ALU, stacked in one register.
+		--The order is 0-23(A), 24-47(B)
+		signal AB: std_logic_vector(47 downto 0);
 
-	--Alu Output Register. It stores the result of the alu operation.
-	signal AOR: std_logic_vector(23 downto 0);
+		--Registers Extra A and B. Both two registers are used to save the AB data.
+		--The order is 0-15(A), 16-31(B)
+		signal EAB: std_logic_vector(31 downto 0);
 
+		--Alu new flag register, chnged after doing each operation if Flag_F is actived
+		signal FR_Out: std_logic_vector(15 downto 0);
 
+		--Alu Output Register. It stores the result of the alu operation.
+		signal AOR: std_logic_vector(23 downto 0);
 
-	--SEGMENT REGISTERS--
 
-	--Code segment register.
-	signal CS: std_logic_vector(23 downto 0);
 
-	--Data segment register.
-	signal DS: std_logic_vector(23 downto 0);
+		--SEGMENT REGISTERS--
 
-	--Extra data segment register.
-	signal ES: std_logic_vector(23 downto 0);
+		--Code segment register.
+		signal CS: std_logic_vector(23 downto 0);
 
-	--Extra data 2 segment register
-	signal FS: std_logic_vector(23 downto 0);
+		--Data segment register.
+		signal DS: std_logic_vector(23 downto 0);
 
-	--Extra data 3 segment register
-	signal GS: std_logic_vector(23 downto 0);
+		--Extra data segment register.
+		signal ES: std_logic_vector(23 downto 0);
 
-	--Stack segment register.
-	signal SS: std_logic_vector(23 downto 0);
+		--Extra data 2 segment register
+		signal FS: std_logic_vector(23 downto 0);
 
+		--Extra data 3 segment register
+		signal GS: std_logic_vector(23 downto 0);
 
+		--Stack segment register.
+		signal SS: std_logic_vector(23 downto 0);
 
-	--STACK REGISTERS--
 
-	--Stack pointer register.
-	signal SP: unsigned(23 downto 0);
 
-	--Base stack pointer register.
-	signal BP: unsigned(23 downto 0);
+		--STACK REGISTERS--
 
+		--Stack pointer register.
+		signal SP: unsigned(23 downto 0);
 
+		--Base stack pointer register.
+		signal BP: unsigned(23 downto 0);
 
-	--INDEX REGISTER--
 
-	--Source index register.
-	signal SI: std_logic_vector(23 downto 0);
 
-	--Destination index register.
-	signal DI: std_logic_vector(23 downto 0);
+		--INDEX REGISTER--
 
+		--Source index register.
+		signal SI: std_logic_vector(23 downto 0);
 
+		--Destination index register.
+		signal DI: std_logic_vector(23 downto 0);
 
-	--I/O REGISTERS--
 
-	--Read / Write register. Stores if the processor is going to read/write in the next clock cycle.
-	--0 is reading, 1 is writting
-	signal RW_R: std_logic;
 
-	--Data output intermediate register. Stores the data which is going to be written, FIX, may can be
-	--deleted
-	signal data_out: std_logic_vector(15 downto 0);
+		--I/O REGISTERS--
 
+		--Read / Write register. Stores if the processor is going to read/write in the next clock cycle.
+		--0 is reading, 1 is writting
+		signal RW_R: std_logic;
 
+		--Data output intermediate register. Stores the data which is going to be written, FIX, may can be
+		--deleted
+		signal data_out: std_logic_vector(15 downto 0);
 
-	--INTERRUPT REGISTERS--
 
-	--High Priority non maskable Interrupt
-	signal HPI: std_logic;
 
-	--High Priority non maskable Interrupt Off
-	signal HPIO: std_logic;
+		--INTERRUPT REGISTERS--
 
-	--Hight Priority non maskable Interrupt Address register
-	signal HPIA: std_logic_vector(23 downto 0);
+		--High Priority non maskable Interrupt
+		signal HPI: std_logic;
 
-	--Medium Priority maskable Interrupt
-	signal MPI: std_logic;
+		--High Priority non maskable Interrupt Off
+		signal HPIO: std_logic;
 
-	--Medium Priority maskable Interrupt Off
-	signal MPIO: std_logic;
+		--Hight Priority non maskable Interrupt Address register
+		signal HPIA: std_logic_vector(23 downto 0);
 
-	--Medium Priority maskable Interrupt Address register
-	signal MPIA: std_logic_vector(23 downto 0);
+		--Medium Priority maskable Interrupt
+		signal MPI: std_logic;
 
-	--Low Priority maskable Interrupt
-	signal LPI: std_logic;
+		--Medium Priority maskable Interrupt Off
+		signal MPIO: std_logic;
 
-	--Low Priority maskable Interrupt Off
-	signal LPIO: std_logic;
+		--Medium Priority maskable Interrupt Address register
+		signal MPIA: std_logic_vector(23 downto 0);
 
-	--Low Priority maskable Interrupt Address register
-	signal LPIA: std_logic_vector(23 downto 0);
+		--Low Priority maskable Interrupt
+		signal LPI: std_logic;
 
-	--Actual Interrupt being Executed
-	-- 00 -> No interrupt, 01 -> LPI, 10 -> MPI, 11 -> HPI
-	signal AIE: std_logic_vector(1 downto 0);
+		--Low Priority maskable Interrupt Off
+		signal LPIO: std_logic;
 
+		--Low Priority maskable Interrupt Address register
+		signal LPIA: std_logic_vector(23 downto 0);
 
+		--Actual Interrupt being Executed
+		-- 00 -> No interrupt, 01 -> LPI, 10 -> MPI, 11 -> HPI
+		signal AIE: std_logic_vector(1 downto 0);
 
-	--BUS REGISTERS--
 
-	--Data bus.
-	signal D_B: std_logic_vector(15 downto 0);
 
-	--Address bus.
-	signal A_B: std_logic_vector(23 downto 0);
+		--BUS REGISTERS--
 
-	--Segment bus.
-	signal S_B: std_logic_vector(23 downto 0);
+		--Data bus.
+		signal D_B: std_logic_vector(15 downto 0);
 
+		--Address bus.
+		signal A_B: std_logic_vector(23 downto 0);
 
+		--Segment bus.
+		signal S_B: std_logic_vector(23 downto 0);
 
-	--SPECIAL PURPOSE REGISTERS--
 
-	--Program counter register, used to count the next address to acces. Probably having less address space
-	signal PC: unsigned(23 downto 0); --23 is to change
 
-	--Instruccion register. It stores the instruccion recived, that needs to be decoded
-	signal IR: std_logic_vector(15 downto 0);
+		--SPECIAL PURPOSE REGISTERS--
 
-	--Extra instruccion register
-	signal EIR: std_logic_vector(47 downto 0);
+		--Program counter register, used to count the next address to acces. Probably having less address space
+		signal PC: unsigned(23 downto 0); --23 is to change
 
-	--Complete instruccion recived
-	signal CIR: std_logic;
+		--Instruccion register. It stores the instruccion recived, that needs to be decoded
+		signal IR: std_logic_vector(15 downto 0);
 
-	--Instruccion count register. It stores in which part of the instruccion is the processor in.
-	--When we need instruccions to be longer than 16 bits, we use multiple address to send a single instruccion,
-	--so we need to know at what part of the instruccion we are in. Example:
-	--Instruccion:
-	-- * MOV REG, REG | 1000 00000000 REG_CODE | REG_CODE 000000000000 || 2 instruccion steps    To be seen if we put double registers
-	-- * MOV REG, ADD | 1SEG 00000001 REG_CODE | ADDRESS || 2 instruccion steps 
-	-- * MOV ADD, REG | 1SEG 00000010 REG_CODE | ADDRESS || 2 instruccion steps 
-	-- * MOV ADD, ADD | 1SEG 00000011 0000 | ADDRESS | ADDRESS || 3 instruccion steps
-	--THE LENGHT CAN NOT BE MODIFIED, WITHOUT FURTHER PROBLEMS
-	signal IC: unsigned(1 downto 0);
+		--Extra instruccion register
+		signal EIR: std_logic_vector(47 downto 0);
 
-	--Last instruccion count register. It stores the last 16bits that are part of this instruccion.
-	--THE LENGHT CAN NOT BE MODIFIED, WITHOUT FURTHER PROBLEMS
-	signal LIC: unsigned(1 downto 0);
+		--Complete instruccion recived
+		signal CIR: std_logic;
 
-	--Flag register. It stores all the flags used by the cpu.
-	signal FR: std_logic_vector(15 downto 0) := rstFlagRegister;
+		--Instruccion count register. It stores in which part of the instruccion is the processor in.
+		--When we need instruccions to be longer than 16 bits, we use multiple address to send a single instruccion,
+		--so we need to know at what part of the instruccion we are in. Example:
+		--Instruccion:
+		-- * MOV REG, REG | 1000 00000000 REG_CODE | REG_CODE 000000000000 || 2 instruccion steps    To be seen if we put double registers
+		-- * MOV REG, ADD | 1SEG 00000001 REG_CODE | ADDRESS || 2 instruccion steps 
+		-- * MOV ADD, REG | 1SEG 00000010 REG_CODE | ADDRESS || 2 instruccion steps 
+		-- * MOV ADD, ADD | 1SEG 00000011 0000 | ADDRESS | ADDRESS || 3 instruccion steps
+		--THE LENGHT CAN NOT BE MODIFIED, WITHOUT FURTHER PROBLEMS
+		signal IC: unsigned(1 downto 0);
 
+		--Last instruccion count register. It stores the last 16bits that are part of this instruccion.
+		--THE LENGHT CAN NOT BE MODIFIED, WITHOUT FURTHER PROBLEMS
+		signal LIC: unsigned(1 downto 0);
 
+		--Flag register. It stores all the flags used by the cpu.
+		signal FR: std_logic_vector(15 downto 0) := rstFlagRegister;
 
-	--INSTRUCCIONS AND MICROCODE REGISTERS--
 
-	--Microcode register cycle. Each instruccion can be composed up to 16 different microinstruccions in series
-	--but, can be also done in paralel if possible.
-	--THE LENGHT CAN BE MODIFIED, WITHOUT FURTHER PROBLEMS
-	signal MRC: unsigned(3 downto 0);
 
-	--Last microcode register cycle. The last microcode cycle that the actual instruccion in the actual count is going to be. Without including the last.
-	--THE LENGHT CAN BE MODIFIED, WITHOUT FURTHER PROBLEMS
-	signal LMRC: unsigned(3 downto 0);
+		--INSTRUCCIONS AND MICROCODE REGISTERS--
 
+		--Microcode register cycle. Each instruccion can be composed up to 16 different microinstruccions in series
+		--but, can be also done in paralel if possible.
+		--THE LENGHT CAN BE MODIFIED, WITHOUT FURTHER PROBLEMS
+		signal MRC: unsigned(3 downto 0);
 
+		--Last microcode register cycle. The last microcode cycle that the actual instruccion in the actual count is going to be. Without including the last.
+		--THE LENGHT CAN BE MODIFIED, WITHOUT FURTHER PROBLEMS
+		signal LMRC: unsigned(3 downto 0);
+ 
 
-	--OTHERS--
 
-	--Indicates when the reset cycle has finished
-	signal RstComplete: std_logic;
+		--OTHERS--
 
+		--Indicates when the reset cycle has finished
+		signal RstComplete: std_logic;
 
 
 	--CONTROL SIGNALS--
@@ -376,7 +383,7 @@ architecture Behavioral of cpu is
 
 
 
-		--ALU/ADD CONTROL--
+		--ALU CONTROL--
 
 		--Alu Operation register. It stores the next operation to perform.
 		signal ALUOp: std_logic_vector(3 downto 0); -- See AluOperations
@@ -386,16 +393,28 @@ architecture Behavioral of cpu is
 
 
 
-		--ALU/ADD INPUT REGISTERS CONTROL--
+		--ALU INPUT REGISTERS CONTROL--
 
 		--A register control signals
 		signal Ad_in: std_logic; -- {DataBus => A}
 		signal Aa_in: std_logic; -- {AddressBus => A}
+		signal Ae_in: std_logic; -- {EA => A}
 
 		--B register control signals
 		signal Bd_in: std_logic; -- {DataBus => B}
 		signal Ba_in: std_logic; -- {AddressBus => B}
 		signal Bs_in: std_logic; -- {SegmentBus => B}
+		signal Be_in: std_logic; -- {EB => B}
+
+
+
+		--Extra ALU REGISTERS CONTROL--
+
+		--EA register control signals
+		signal EA_in: std_logic; -- {A(15 downto 0) => EA}
+
+		--EB register control signals
+		signal EB_in: std_logic; -- {B(15 downto 0) => EB}
 
 
 
@@ -503,9 +522,11 @@ begin
 			ALUOpL => ALUOpL,
 			Ad_in => Ad_in,
 			Aa_in => Aa_in,
+			Ae_in => Ae_in,
 			Bd_in => Bd_in,
 			Ba_in => Ba_in,
 			Bs_in => Bs_in,
+			Be_in => Be_in,
 			X_in => X_in,
 			XH_in => XH_in,
 			XL_in => XL_in,
@@ -892,6 +913,7 @@ begin
 		--If the reset is triggered
 		if rst = '0' then
 			AB <= (others => '0');
+			EAB <= (others => '0');
 
 		--If we are in the rising edge of the clock
 		elsif rising_edge(clk) then
@@ -910,6 +932,11 @@ begin
 					AB(23 downto 0) <= A_B;
 				end if;
 
+				--If we are inputting data from the extra A register to the A register
+				if Ae_in = '1' then
+					AB(23 downto 0) <= "00000000" & EAB(15 downto 0);
+				end if;
+
 				--If we are inputting data from the data bus to the B register
 				if Bd_in = '1' then
 					AB(47 downto 24) <= "00000000" & D_B;
@@ -923,6 +950,21 @@ begin
 				--If we are inputting data from the segment bus to the B register
 				if Bs_in = '1' then
 					AB(47 downto 24) <= S_B;
+				end if;
+
+				--If we are inputting data from the extra B register to the B register
+				if Be_in = '1' then
+					AB(47 downto 24) <= "00000000" & EAB(31 downto 16);
+				end if;
+
+				--If we are inputting data from the A register to the extra A register
+				if EA_in = '1' then
+					EAB(15 downto 0) <= AB(15 downto 0);
+				end if;
+
+				--If we are inputting data from the B register to the extra B register
+				if EB_in = '1' then
+					EAB(31 downto 16) <= AB(39 downto 24);
 				end if;
 
 				--If we are inputting data from the data bus to the FR register

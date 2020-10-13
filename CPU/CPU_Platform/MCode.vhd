@@ -51,16 +51,18 @@ entity MCode is
 		Set_A       : out std_logic_vector(3 downto 0); -- Set address bus to
 		Set_S       : out std_logic_vector(2 downto 0); -- Set segment bus to
 
-		--Alu/Add control
+		--Alu control
 		ALUOp       : out std_logic_vector(3 downto 0); -- See AluOperations
 		ALUOpL      : out std_logic; -- {0->16bits, 1->24bits}
 
-		--Alu/Add input control
+		--Alu input regsters control
 		Ad_in       : out std_logic; -- {DataBus => A}
 		Aa_in       : out std_logic; -- {AddressBus => A}
+		Ae_in       : out std_logic; -- {EA => A}
 		Bd_in       : out std_logic; -- {DataBus => B}
 		Ba_in       : out std_logic; -- {AddressBus => B}
 		Bs_in       : out std_logic; -- {SegmentBus => B}
+		Be_in       : out std_logic; -- {EB => B}
 
 		--General purpose register control
 		X_in        : out std_logic; -- {DataBus => X}

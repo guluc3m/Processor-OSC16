@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Processor16Bits
-Sun Oct 11 02:08:20 2020
+Tue Oct 13 22:31:52 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -52,15 +52,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Oct 11 02:08:20 2020       ;
+; Analysis & Synthesis Status        ; Successful - Tue Oct 13 22:31:52 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Processor16Bits                             ;
 ; Top-level Entity Name              ; cpu                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 955                                         ;
-;     Total combinational functions  ; 848                                         ;
-;     Dedicated logic registers      ; 313                                         ;
-; Total registers                    ; 313                                         ;
+; Total logic elements               ; 718                                         ;
+;     Total combinational functions  ; 621                                         ;
+;     Dedicated logic registers      ; 262                                         ;
+; Total registers                    ; 262                                         ;
 ; Total pins                         ; 49                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 1,024                                       ;
@@ -169,31 +169,30 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
+;     Processor 2            ;   0.1%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                                           ;
-+----------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                                                                                                                              ; Library ;
-+----------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; CPU_Platform/MCode.vhd           ; yes             ; User VHDL File                                        ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd          ;         ;
-; CPU_Platform/cpu.vhd             ; yes             ; User VHDL File                                        ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd            ;         ;
-; CPU_Platform/Constants.vhd       ; yes             ; User VHDL File                                        ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/Constants.vhd      ;         ;
-; CPU_Platform/ALU.vhd             ; yes             ; User VHDL File                                        ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd            ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf                                                                                                     ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc                                                                                              ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc                                                                                                        ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc                                                                                                     ;         ;
-; aglobal181.inc                   ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc                                                                                                     ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc                                                                                                      ;         ;
-; altrom.inc                       ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc                                                                                                         ;         ;
-; altram.inc                       ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc                                                                                                         ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                                          ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc                                                                                                       ;         ;
-; db/altsyncram_3o01.tdf           ; yes             ; Auto-Generated Megafunction                           ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/altsyncram_3o01.tdf          ;         ;
-; Processor16Bits.cpu0.rtl.mif     ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/Processor16Bits.cpu0.rtl.mif ;         ;
-+----------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                             ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                         ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; CPU_Platform/MCode.vhd           ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd     ;         ;
+; CPU_Platform/cpu.vhd             ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd       ;         ;
+; CPU_Platform/Constants.vhd       ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/Constants.vhd ;         ;
+; CPU_Platform/ALU.vhd             ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd       ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf                                                                                                ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc                                                                                         ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc                                                                                                   ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc                                                                                                ;         ;
+; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc                                                                                                ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc                                                                                                 ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc                                                                                                    ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc                                                                                                    ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc                                                                                                  ;         ;
+; db/altsyncram_3o01.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/altsyncram_3o01.tdf     ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -201,20 +200,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 955       ;
+; Estimated Total logic elements              ; 718       ;
 ;                                             ;           ;
-; Total combinational functions               ; 848       ;
+; Total combinational functions               ; 621       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 552       ;
-;     -- 3 input functions                    ; 139       ;
-;     -- <=2 input functions                  ; 157       ;
+;     -- 4 input functions                    ; 428       ;
+;     -- 3 input functions                    ; 93        ;
+;     -- <=2 input functions                  ; 100       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 800       ;
-;     -- arithmetic mode                      ; 48        ;
+;     -- normal mode                          ; 598       ;
+;     -- arithmetic mode                      ; 23        ;
 ;                                             ;           ;
-; Total registers                             ; 313       ;
-;     -- Dedicated logic registers            ; 313       ;
+; Total registers                             ; 262       ;
+;     -- Dedicated logic registers            ; 262       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 49        ;
@@ -223,8 +222,8 @@ refer to the applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; rst~input ;
-; Maximum fan-out                             ; 313       ;
-; Total fan-out                               ; 4393      ;
+; Maximum fan-out                             ; 266       ;
+; Total fan-out                               ; 3438      ;
 ; Average fan-out                             ; 3.43      ;
 +---------------------------------------------+-----------+
 
@@ -234,9 +233,8 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                        ; Entity Name     ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
-; |cpu                                      ; 848 (633)           ; 313 (286)                 ; 1024        ; 0            ; 0       ; 0         ; 49   ; 0            ; |cpu                                                                       ; cpu             ; work         ;
-;    |ALU:ArithmeticLogicUnit|              ; 93 (93)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|ALU:ArithmeticLogicUnit                                               ; ALU             ; work         ;
-;    |MCode:MicroCode|                      ; 122 (122)           ; 27 (27)                   ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode                                                       ; MCode           ; work         ;
+; |cpu                                      ; 621 (516)           ; 262 (241)                 ; 1024        ; 0            ; 0       ; 0         ; 49   ; 0            ; |cpu                                                                       ; cpu             ; work         ;
+;    |MCode:MicroCode|                      ; 105 (105)           ; 21 (21)                   ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode                                                       ; MCode           ; work         ;
 ;       |altsyncram:Mux48_rtl_0|            ; 0 (0)               ; 0 (0)                     ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode|altsyncram:Mux48_rtl_0                                ; altsyncram      ; work         ;
 ;          |altsyncram_3o01:auto_generated| ; 0 (0)               ; 0 (0)                     ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode|altsyncram:Mux48_rtl_0|altsyncram_3o01:auto_generated ; altsyncram_3o01 ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
@@ -322,15 +320,25 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LPIA[1,3,5,7]                           ; Merged with CS[0]                      ;
 ; MPIA[9,11,13,15]                        ; Merged with CS[0]                      ;
 ; SS[1,2]                                 ; Merged with CS[0]                      ;
-; AB[41..47]                              ; Merged with AB[40]                     ;
 ; FR[1,9]                                 ; Merged with FR[13]                     ;
 ; BP[0]                                   ; Stuck at GND due to stuck port data_in ;
 ; CS[0]                                   ; Stuck at VCC due to stuck port data_in ;
-; AB[40]                                  ; Stuck at GND due to stuck port data_in ;
+; AB[40..47]                              ; Stuck at GND due to stuck port data_in ;
 ; FR[13]                                  ; Stuck at VCC due to stuck port data_in ;
 ; FR[10]                                  ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Ad_in                   ; Lost fanout                            ;
+; MCode:MicroCode|Aa_in                   ; Lost fanout                            ;
+; MCode:MicroCode|Bd_in                   ; Lost fanout                            ;
+; MCode:MicroCode|Bs_in                   ; Lost fanout                            ;
+; AB[0,24]                                ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|ALUOp[0]                ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 327 ;                                        ;
+; AB[1..23,25..39]                        ; Stuck at GND due to stuck port data_in ;
+; FR[0,4,11]                              ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|ALUOp[1]                ; Lost fanout                            ;
+; MCode:MicroCode|ALUOpL                  ; Lost fanout                            ;
+; FR[12]                                  ; Stuck at GND due to stuck port data_in ;
+; FR[6]                                   ; Merged with FR[2]                      ;
+; Total Number of Removed Registers = 378 ;                                        ;
 +-----------------------------------------+----------------------------------------+
 
 
@@ -342,10 +350,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; MCode:MicroCode|Set_S[2] ; Stuck at GND              ; CS[23], CS[22], CS[21], CS[20], CS[19], CS[18], CS[17], CS[16], DS[23], DS[22], DS[21], DS[20], DS[19], ;
 ;                          ; due to stuck port data_in ; DS[18], DS[17], DS[16], ES[23], ES[22], ES[21], ES[20], ES[19], ES[18], ES[17], ES[16], FS[23], FS[22], ;
 ;                          ;                           ; FS[21], FS[20], FS[19], FS[18], FS[17], FS[16], GS[23], GS[22], GS[21], GS[20], GS[19], GS[18], GS[17], ;
-;                          ;                           ; GS[16], SS[23], SS[22], SS[21], SS[20], SS[19], SS[18], SS[17], SS[16], AB[40]                          ;
-; MCode:MicroCode|FR_in    ; Stuck at GND              ; FR[13], FR[10]                                                                                          ;
-;                          ; due to stuck port data_in ;                                                                                                         ;
-; MCode:MicroCode|BPd_in   ; Stuck at GND              ; BP[0]                                                                                                   ;
+;                          ;                           ; GS[16], SS[23], SS[22], SS[21], SS[20], SS[19], SS[18], SS[17], SS[16], AB[47], AB[46], AB[45], AB[44], ;
+;                          ;                           ; AB[43], AB[42], AB[41], AB[40], MCode:MicroCode|Bd_in, MCode:MicroCode|Bs_in, AB[24], AB[27],           ;
+;                          ;                           ; AB[26], AB[25], AB[28], AB[39], AB[38], AB[37], AB[36], AB[35], AB[34], AB[33], AB[32], AB[31], AB[30], ;
+;                          ;                           ; AB[29], MCode:MicroCode|ALUOpL                                                                          ;
+; MCode:MicroCode|BPd_in   ; Stuck at GND              ; BP[0], MCode:MicroCode|Ad_in, MCode:MicroCode|Aa_in, AB[0], AB[3], AB[2], AB[1], AB[4], AB[23],         ;
+;                          ; due to stuck port data_in ; AB[22], AB[21], AB[20], AB[19], AB[18], AB[17], AB[16], AB[15], AB[14], AB[13], AB[12], AB[11], AB[10], ;
+;                          ;                           ; AB[9], AB[8], AB[7], AB[6], AB[5]                                                                       ;
+; MCode:MicroCode|FR_in    ; Stuck at GND              ; FR[13], FR[10], FR[4], FR[0], FR[11], MCode:MicroCode|ALUOp[1], FR[12]                                  ;
 ;                          ; due to stuck port data_in ;                                                                                                         ;
 ; MCode:MicroCode|CSd_in   ; Stuck at GND              ; CS[0]                                                                                                   ;
 ;                          ; due to stuck port data_in ;                                                                                                         ;
@@ -357,12 +369,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 313   ;
+; Total registers                              ; 262   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 41    ;
-; Number of registers using Asynchronous Clear ; 282   ;
+; Number of registers using Synchronous Load   ; 33    ;
+; Number of registers using Asynchronous Clear ; 240   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 309   ;
+; Number of registers using Clock Enable       ; 257   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -376,43 +388,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; EIR[16]                                 ; 3       ;
 ; EIR[24]                                 ; 3       ;
 ; EIR[0]                                  ; 2       ;
-; EIR[1]                                  ; 2       ;
 ; EIR[17]                                 ; 3       ;
 ; EIR[25]                                 ; 2       ;
+; EIR[1]                                  ; 2       ;
 ; EIR[18]                                 ; 3       ;
 ; EIR[26]                                 ; 3       ;
 ; EIR[2]                                  ; 2       ;
-; EIR[3]                                  ; 2       ;
 ; EIR[19]                                 ; 3       ;
-; EIR[27]                                 ; 2       ;
+; EIR[27]                                 ; 3       ;
+; EIR[3]                                  ; 2       ;
 ; EIR[20]                                 ; 3       ;
 ; EIR[28]                                 ; 3       ;
 ; EIR[4]                                  ; 2       ;
-; EIR[5]                                  ; 2       ;
 ; EIR[21]                                 ; 3       ;
 ; EIR[29]                                 ; 2       ;
+; EIR[5]                                  ; 2       ;
 ; EIR[22]                                 ; 3       ;
 ; EIR[30]                                 ; 3       ;
 ; EIR[6]                                  ; 2       ;
-; EIR[7]                                  ; 2       ;
 ; EIR[23]                                 ; 3       ;
-; EIR[31]                                 ; 2       ;
+; EIR[31]                                 ; 3       ;
+; EIR[7]                                  ; 2       ;
 ; EIR[32]                                 ; 2       ;
 ; EIR[8]                                  ; 2       ;
-; EIR[9]                                  ; 2       ;
 ; EIR[33]                                 ; 1       ;
+; EIR[9]                                  ; 2       ;
 ; EIR[34]                                 ; 2       ;
 ; EIR[10]                                 ; 2       ;
 ; EIR[11]                                 ; 2       ;
-; EIR[35]                                 ; 1       ;
+; EIR[35]                                 ; 2       ;
 ; EIR[36]                                 ; 2       ;
 ; EIR[12]                                 ; 2       ;
-; EIR[13]                                 ; 2       ;
 ; EIR[37]                                 ; 1       ;
+; EIR[13]                                 ; 2       ;
 ; EIR[38]                                 ; 2       ;
 ; EIR[14]                                 ; 2       ;
+; EIR[39]                                 ; 2       ;
 ; EIR[15]                                 ; 2       ;
-; EIR[39]                                 ; 1       ;
 ; EIR[40]                                 ; 1       ;
 ; EIR[41]                                 ; 1       ;
 ; EIR[42]                                 ; 1       ;
@@ -443,11 +455,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 ; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |cpu|Address[0]~reg0               ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |cpu|AB[33]                        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |cpu|AB[20]                        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |cpu|AB[4]                         ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |cpu|AB[30]                        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |cpu|AB[23]                        ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |cpu|AB[5]                         ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |cpu|IC[0]                         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |cpu|FR[6]                         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |cpu|FR[12]                        ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |cpu|AIE[0]                        ;
 ; 13:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |cpu|MCode:MicroCode|Set_A[3]      ;
 ; 35:1               ; 2 bits    ; 46 LEs        ; 6 LEs                ; 40 LEs                 ; Yes        ; |cpu|MCode:MicroCode|DE            ;
@@ -579,27 +591,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 49                          ;
-; cycloneiii_ff         ; 313                         ;
+; cycloneiii_ff         ; 262                         ;
 ;     CLR               ; 4                           ;
-;     ENA               ; 30                          ;
-;     ENA CLR           ; 238                         ;
-;     ENA CLR SLD       ; 40                          ;
+;     ENA               ; 20                          ;
+;     ENA CLR           ; 204                         ;
+;     ENA CLR SLD       ; 32                          ;
 ;     ENA SLD           ; 1                           ;
+;     plain             ; 1                           ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 848                         ;
-;     arith             ; 48                          ;
-;         2 data inputs ; 31                          ;
-;         3 data inputs ; 17                          ;
-;     normal            ; 800                         ;
-;         0 data inputs ; 2                           ;
+; cycloneiii_lcell_comb ; 621                         ;
+;     arith             ; 23                          ;
+;         2 data inputs ; 22                          ;
+;         3 data inputs ; 1                           ;
+;     normal            ; 598                         ;
 ;         1 data inputs ; 2                           ;
-;         2 data inputs ; 122                         ;
-;         3 data inputs ; 122                         ;
-;         4 data inputs ; 552                         ;
+;         2 data inputs ; 76                          ;
+;         3 data inputs ; 92                          ;
+;         4 data inputs ; 428                         ;
 ; cycloneiii_ram_block  ; 4                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 12.60                       ;
-; Average LUT depth     ; 5.78                        ;
+; Max LUT depth         ; 6.00                        ;
+; Average LUT depth     ; 3.84                        ;
 +-----------------------+-----------------------------+
 
 
@@ -618,15 +630,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun Oct 11 02:07:58 2020
+    Info: Processing started: Tue Oct 13 22:31:24 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Processor16Bits -c Processor16Bits
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file cpu_platform/mcode.vhd
-    Info (12022): Found design unit 1: MCode-Behavioral File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 119
+    Info (12022): Found design unit 1: MCode-Behavioral File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 121
     Info (12023): Found entity 1: MCode File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 21
 Info (12021): Found 2 design units, including 1 entities, in source file cpu_platform/cpu.vhd
-    Info (12022): Found design unit 1: cpu-Behavioral File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 127
+    Info (12022): Found design unit 1: cpu-Behavioral File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 129
     Info (12023): Found entity 1: cpu File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 77
 Info (12021): Found 1 design units, including 0 entities, in source file cpu_platform/constants.vhd
     Info (12022): Found design unit 1: Constants File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/Constants.vhd Line: 18
@@ -637,10 +649,47 @@ Info (12021): Found 2 design units, including 1 entities, in source file process
     Info (12022): Found design unit 1: Processor16Bits-Behavioral File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/Processor16Bits.vhd Line: 13
     Info (12023): Found entity 1: Processor16Bits File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/Processor16Bits.vhd Line: 6
 Info (12127): Elaborating entity "cpu" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(315): object "Halt" assigned a value but never read File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 315
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(364): object "IR_in" assigned a value but never read File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 364
-Info (12128): Elaborating entity "MCode" for hierarchy "MCode:MicroCode" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 481
-Info (12128): Elaborating entity "ALU" for hierarchy "ALU:ArithmeticLogicUnit" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 552
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(322): object "Halt" assigned a value but never read File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 322
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(371): object "IR_in" assigned a value but never read File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 371
+Warning (10541): VHDL Signal Declaration warning at cpu.vhd(414): used implicit default value for signal "EA_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 414
+Warning (10541): VHDL Signal Declaration warning at cpu.vhd(417): used implicit default value for signal "EB_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 417
+Warning (10631): VHDL Process Statement warning at cpu.vhd(910): inferring latch(es) for signal or variable "EAB", which holds its previous value in one or more paths through the process File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[0]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[1]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[2]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[3]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[4]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[5]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[6]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[7]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[8]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[9]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[10]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[11]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[12]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[13]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[14]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[15]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[16]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[17]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[18]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[19]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[20]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[21]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[22]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[23]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[24]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[25]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[26]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[27]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[28]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[29]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[30]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (10041): Inferred latch for "EAB[31]" at cpu.vhd(910) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 910
+Info (12128): Elaborating entity "MCode" for hierarchy "MCode:MicroCode" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 500
+Warning (10541): VHDL Signal Declaration warning at MCode.vhd(61): used implicit default value for signal "Ae_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 61
+Warning (10541): VHDL Signal Declaration warning at MCode.vhd(65): used implicit default value for signal "Be_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 65
+Info (12128): Elaborating entity "ALU" for hierarchy "ALU:ArithmeticLogicUnit" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 573
 Warning (10492): VHDL Process Statement warning at ALU.vhd(164): signal "ADC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 164
 Warning (10492): VHDL Process Statement warning at ALU.vhd(245): signal "SBC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 245
 Info (19000): Inferred 1 megafunctions from design logic
@@ -663,22 +712,22 @@ Info (12133): Instantiated megafunction "MCode:MicroCode|altsyncram:Mux48_rtl_0"
     Info (12134): Parameter "INIT_FILE" = "Processor16Bits.cpu0.rtl.mif"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_3o01.tdf
     Info (12023): Found entity 1: altsyncram_3o01 File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/altsyncram_3o01.tdf Line: 27
-Info (13000): Registers with preset signals will power-up high File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 308
+Info (13000): Registers with preset signals will power-up high File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 316
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 48 registers lost all their fanouts during netlist optimizations.
+Info (17049): 54 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1061 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 823 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 7 input pins
     Info (21059): Implemented 26 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 1008 logic cells
+    Info (21061): Implemented 770 logic cells
     Info (21064): Implemented 4 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 4798 megabytes
-    Info: Processing ended: Sun Oct 11 02:08:20 2020
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:41
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info: Peak virtual memory: 4793 megabytes
+    Info: Processing ended: Tue Oct 13 22:31:52 2020
+    Info: Elapsed time: 00:00:28
+    Info: Total CPU time (on all processors): 00:00:39
 
 
