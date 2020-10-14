@@ -8,10 +8,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "RW",
-					"strict" : false
-				},
-				{
 					"name" : "Address[0]",
 					"strict" : false
 				},
@@ -108,67 +104,35 @@
 					"strict" : false
 				},
 				{
-					"name" : "DataO[0]",
+					"name" : "Address[24]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[1]",
+					"name" : "Address[25]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[2]",
+					"name" : "Address[26]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[3]",
+					"name" : "Address[27]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[4]",
+					"name" : "Address[28]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[5]",
+					"name" : "Address[29]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[6]",
+					"name" : "Address[30]",
 					"strict" : false
 				},
 				{
-					"name" : "DataO[7]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[8]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[9]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[10]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[11]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[12]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[13]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[14]",
-					"strict" : false
-				},
-				{
-					"name" : "DataO[15]",
+					"name" : "Address[31]",
 					"strict" : false
 				},
 				{
@@ -204,38 +168,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "Data[8]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[9]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[10]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[11]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[12]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[13]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[14]",
-					"strict" : false
-				},
-				{
-					"name" : "Data[15]",
-					"strict" : false
-				},
-				{
 					"name" : "clk",
 					"strict" : false
 				},
@@ -252,11 +184,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "HPI_p",
+					"name" : "MPI_p",
 					"strict" : false
 				},
 				{
-					"name" : "MPI_p",
+					"name" : "HPI_p",
 					"strict" : false
 				},
 				{

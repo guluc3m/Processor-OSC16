@@ -1,0 +1,6 @@
+--BUG REPORT--
+--- DATE ---- SUMMARY ----
+    14/10/20  Automatically add the segment to the address bus with small adders to increase process by 2 steps
+    14/10/20  Automatically set the EIR(31 downto 0) to the address to jump if interrupt occurs, to first execute the BRK instruction and then jumps to EIR(31 downto 0), or how?
+    14/10/20  Reduce the EIR to 32bits
+    14/10/20  Make availble the addrres inmediate value

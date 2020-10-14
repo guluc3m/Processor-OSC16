@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Processor16Bits
-Wed Oct 14 00:42:50 2020
+Thu Oct 15 00:56:10 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -13,20 +13,15 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Analysis & Synthesis RAM Summary
-  9. Registers Removed During Synthesis
- 10. Removed Registers Triggering Further Register Optimizations
- 11. General Register Statistics
- 12. Inverted Register Statistics
- 13. Registers Packed Into Inferred Megafunctions
- 14. Multiplexer Restructuring Statistics (Restructuring Performed)
- 15. Source assignments for MCode:MicroCode|altsyncram:Mux48_rtl_0|altsyncram_3o01:auto_generated
- 16. Parameter Settings for Inferred Entity Instance: MCode:MicroCode|altsyncram:Mux48_rtl_0
- 17. altsyncram Parameter Settings by Entity Instance
- 18. Port Connectivity Checks: "MCode:MicroCode"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Port Connectivity Checks: "MCode:MicroCode"
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
 
 
 
@@ -52,18 +47,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Oct 14 00:42:50 2020       ;
+; Analysis & Synthesis Status        ; Successful - Thu Oct 15 00:56:10 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Processor16Bits                             ;
 ; Top-level Entity Name              ; cpu                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 720                                         ;
-;     Total combinational functions  ; 623                                         ;
-;     Dedicated logic registers      ; 262                                         ;
-; Total registers                    ; 262                                         ;
-; Total pins                         ; 65                                          ;
+; Total logic elements               ; 118                                         ;
+;     Total combinational functions  ; 85                                          ;
+;     Dedicated logic registers      ; 91                                          ;
+; Total registers                    ; 91                                          ;
+; Total pins                         ; 73                                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 1,024                                       ;
+; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 0                                           ;
 +------------------------------------+---------------------------------------------+
@@ -169,30 +164,20 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
+;     Processor 2            ;   0.1%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                             ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                         ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; CPU_Platform/MCode.vhd           ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd     ;         ;
-; CPU_Platform/cpu.vhd             ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd       ;         ;
-; CPU_Platform/Constants.vhd       ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/Constants.vhd ;         ;
-; CPU_Platform/ALU.vhd             ; yes             ; User VHDL File               ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd       ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf                                                                                                ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc                                                                                         ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc                                                                                                   ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc                                                                                                ;         ;
-; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc                                                                                                ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc                                                                                                 ;         ;
-; altrom.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc                                                                                                    ;         ;
-; altram.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc                                                                                                    ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc                                                                                                  ;         ;
-; db/altsyncram_3o01.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/altsyncram_3o01.tdf     ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                                                                         ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; CPU_Platform/MCode.vhd           ; yes             ; User VHDL File  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd     ;         ;
+; CPU_Platform/cpu.vhd             ; yes             ; User VHDL File  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd       ;         ;
+; CPU_Platform/Constants.vhd       ; yes             ; User VHDL File  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/Constants.vhd ;         ;
+; CPU_Platform/ALU.vhd             ; yes             ; User VHDL File  ; C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd       ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -200,54 +185,42 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 720       ;
+; Estimated Total logic elements              ; 118       ;
 ;                                             ;           ;
-; Total combinational functions               ; 623       ;
+; Total combinational functions               ; 85        ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 427       ;
-;     -- 3 input functions                    ; 93        ;
-;     -- <=2 input functions                  ; 103       ;
+;     -- 4 input functions                    ; 24        ;
+;     -- 3 input functions                    ; 16        ;
+;     -- <=2 input functions                  ; 45        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 600       ;
-;     -- arithmetic mode                      ; 23        ;
+;     -- normal mode                          ; 55        ;
+;     -- arithmetic mode                      ; 30        ;
 ;                                             ;           ;
-; Total registers                             ; 262       ;
-;     -- Dedicated logic registers            ; 262       ;
+; Total registers                             ; 91        ;
+;     -- Dedicated logic registers            ; 91        ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 65        ;
-; Total memory bits                           ; 1024      ;
+; I/O pins                                    ; 73        ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; rst~input ;
-; Maximum fan-out                             ; 266       ;
-; Total fan-out                               ; 3456      ;
-; Average fan-out                             ; 3.34      ;
+; Maximum fan-out                             ; 91        ;
+; Total fan-out                               ; 707       ;
+; Average fan-out                             ; 2.09      ;
 +---------------------------------------------+-----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                ;
-+-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
-; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                        ; Entity Name     ; Library Name ;
-+-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
-; |cpu                                      ; 623 (518)           ; 262 (241)                 ; 1024        ; 0            ; 0       ; 0         ; 65   ; 0            ; |cpu                                                                       ; cpu             ; work         ;
-;    |MCode:MicroCode|                      ; 105 (105)           ; 21 (21)                   ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode                                                       ; MCode           ; work         ;
-;       |altsyncram:Mux48_rtl_0|            ; 0 (0)               ; 0 (0)                     ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode|altsyncram:Mux48_rtl_0                                ; altsyncram      ; work         ;
-;          |altsyncram_3o01:auto_generated| ; 0 (0)               ; 0 (0)                     ; 1024        ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode|altsyncram:Mux48_rtl_0|altsyncram_3o01:auto_generated ; altsyncram_3o01 ; work         ;
-+-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------+-----------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                       ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name  ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------+-------------+--------------+
+; |cpu                       ; 85 (79)             ; 91 (88)                   ; 0           ; 0            ; 0       ; 0         ; 73   ; 0            ; |cpu                 ; cpu         ; work         ;
+;    |MCode:MicroCode|       ; 6 (6)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |cpu|MCode:MicroCode ; MCode       ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                 ;
-+----------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
-; Name                                                                             ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                          ;
-+----------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
-; MCode:MicroCode|altsyncram:Mux48_rtl_0|altsyncram_3o01:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 256          ; 4            ; --           ; --           ; 1024 ; Processor16Bits.cpu0.rtl.mif ;
-+----------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
 
 
 +----------------------------------------------------------------------------------+
@@ -256,15 +229,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Register name                           ; Reason for Removal                     ;
 +-----------------------------------------+----------------------------------------+
 ; MCode:MicroCode|LIF                     ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|LMRC[1]                 ; Stuck at VCC due to stuck port data_in ;
 ; MCode:MicroCode|PCd_in                  ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|PCa_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|FR_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|FlagOp[0..3]            ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Set_D[0..4]             ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Set_A[0..3]             ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|Set_S[0..2]             ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Ad_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Aa_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Bd_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|Ba_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Bs_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|X_in                    ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|XH_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|XL_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Y_in                    ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|YH_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|YL_in                   ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Z_in                    ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|ZH_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|ZL_in                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|SPd_in                  ; Stuck at GND due to stuck port data_in ;
@@ -276,7 +260,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; MCode:MicroCode|BP_inc                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|BP_dec                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|SId_in                  ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|SIa_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|DId_in                  ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|DIa_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|CSd_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|CSa_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|DSd_in                  ; Stuck at GND due to stuck port data_in ;
@@ -289,79 +275,82 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; MCode:MicroCode|GSa_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|SSd_in                  ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|SSa_in                  ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|DE                      ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|AE                      ; Stuck at GND due to stuck port data_in ;
+; MCode:MicroCode|Write                   ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|HPIA_in                 ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|MPIA_in                 ; Stuck at GND due to stuck port data_in ;
 ; MCode:MicroCode|LPIA_in                 ; Stuck at GND due to stuck port data_in ;
-; CS[16..23]                              ; Lost fanout                            ;
-; DS[16..23]                              ; Lost fanout                            ;
-; ES[16..23]                              ; Lost fanout                            ;
-; FS[16..23]                              ; Lost fanout                            ;
-; GS[16..23]                              ; Lost fanout                            ;
-; SS[16..23]                              ; Lost fanout                            ;
-; MCode:MicroCode|ALUOp[3]                ; Merged with MCode:MicroCode|ALUOp[1]   ;
-; MCode:MicroCode|ALUOp[2]                ; Merged with MCode:MicroCode|ALUOp[0]   ;
-; FR[3,5,7,8,14,15]                       ; Merged with FR[10]                     ;
-; BP[1..23]                               ; Merged with BP[0]                      ;
-; CS[1..15]                               ; Merged with BP[0]                      ;
-; DS[0,2..15]                             ; Merged with BP[0]                      ;
-; ES[2..15]                               ; Merged with BP[0]                      ;
-; FS[0,1,3..15]                           ; Merged with BP[0]                      ;
-; GS[1,3..15]                             ; Merged with BP[0]                      ;
-; HPIA[0..15]                             ; Merged with BP[0]                      ;
-; LPIA[0,2,4,6,8..23]                     ; Merged with BP[0]                      ;
-; MPIA[0..8,10,12,14,16..23]              ; Merged with BP[0]                      ;
-; SP[0..23]                               ; Merged with BP[0]                      ;
-; SS[0,3..15]                             ; Merged with BP[0]                      ;
-; DS[1]                                   ; Merged with CS[0]                      ;
-; ES[0,1]                                 ; Merged with CS[0]                      ;
-; FS[2]                                   ; Merged with CS[0]                      ;
-; GS[0,2]                                 ; Merged with CS[0]                      ;
-; HPIA[16..23]                            ; Merged with CS[0]                      ;
-; LPIA[1,3,5,7]                           ; Merged with CS[0]                      ;
-; MPIA[9,11,13,15]                        ; Merged with CS[0]                      ;
-; SS[1,2]                                 ; Merged with CS[0]                      ;
-; FR[1,9]                                 ; Merged with FR[13]                     ;
-; BP[0]                                   ; Stuck at GND due to stuck port data_in ;
-; CS[0]                                   ; Stuck at VCC due to stuck port data_in ;
-; AB[40..47]                              ; Stuck at GND due to stuck port data_in ;
-; FR[13]                                  ; Stuck at VCC due to stuck port data_in ;
-; FR[10]                                  ; Stuck at GND due to stuck port data_in ;
-; MCode:MicroCode|Ad_in                   ; Lost fanout                            ;
-; MCode:MicroCode|Aa_in                   ; Lost fanout                            ;
-; MCode:MicroCode|Bd_in                   ; Lost fanout                            ;
-; MCode:MicroCode|Bs_in                   ; Lost fanout                            ;
-; AB[0,24]                                ; Stuck at GND due to stuck port data_in ;
-; MCode:MicroCode|ALUOp[0]                ; Stuck at GND due to stuck port data_in ;
-; AB[1..23,25..39]                        ; Stuck at GND due to stuck port data_in ;
-; FR[0,4,11]                              ; Stuck at GND due to stuck port data_in ;
-; MCode:MicroCode|ALUOp[1]                ; Lost fanout                            ;
-; MCode:MicroCode|ALUOpL                  ; Lost fanout                            ;
-; FR[12]                                  ; Stuck at GND due to stuck port data_in ;
-; FR[6]                                   ; Merged with FR[2]                      ;
-; Total Number of Removed Registers = 378 ;                                        ;
+; IR[8..15]                               ; Lost fanout                            ;
+; SP[0..31]                               ; Lost fanout                            ;
+; BP[0..31]                               ; Lost fanout                            ;
+; SI[0..31]                               ; Lost fanout                            ;
+; DI[0..31]                               ; Lost fanout                            ;
+; HPIA[0..31]                             ; Lost fanout                            ;
+; MPIA[0..31]                             ; Lost fanout                            ;
+; LPIA[0..31]                             ; Lost fanout                            ;
+; CS[0..31]                               ; Lost fanout                            ;
+; DS[0..31]                               ; Lost fanout                            ;
+; ES[0..31]                               ; Lost fanout                            ;
+; FS[0..31]                               ; Lost fanout                            ;
+; GS[0..31]                               ; Lost fanout                            ;
+; SS[0..31]                               ; Lost fanout                            ;
+; EIR[0..31]                              ; Lost fanout                            ;
+; AB[1..63]                               ; Lost fanout                            ;
+; FR[0..8,10..15]                         ; Lost fanout                            ;
+; X[0..15]                                ; Lost fanout                            ;
+; Y[0..15]                                ; Lost fanout                            ;
+; Z[0..15]                                ; Lost fanout                            ;
+; AB[0]                                   ; Lost fanout                            ;
+; MCode:MicroCode|LMRC[2,3]               ; Merged with MCode:MicroCode|LMRC[0]    ;
+; MCode:MicroCode|LIC[1]                  ; Merged with MCode:MicroCode|LIC[0]     ;
+; data_out[1..15]                         ; Merged with data_out[0]                ;
+; FR[9]                                   ; Stuck at VCC due to stuck port data_in ;
+; data_out[0]                             ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 668 ;                                        ;
 +-----------------------------------------+----------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                    ;
-+--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
-; Register name            ; Reason for Removal        ; Registers Removed due to This Register                                                                  ;
-+--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
-; MCode:MicroCode|Set_S[2] ; Stuck at GND              ; CS[23], CS[22], CS[21], CS[20], CS[19], CS[18], CS[17], CS[16], DS[23], DS[22], DS[21], DS[20], DS[19], ;
-;                          ; due to stuck port data_in ; DS[18], DS[17], DS[16], ES[23], ES[22], ES[21], ES[20], ES[19], ES[18], ES[17], ES[16], FS[23], FS[22], ;
-;                          ;                           ; FS[21], FS[20], FS[19], FS[18], FS[17], FS[16], GS[23], GS[22], GS[21], GS[20], GS[19], GS[18], GS[17], ;
-;                          ;                           ; GS[16], SS[23], SS[22], SS[21], SS[20], SS[19], SS[18], SS[17], SS[16], AB[47], AB[46], AB[45], AB[44], ;
-;                          ;                           ; AB[43], AB[42], AB[41], AB[40], MCode:MicroCode|Bd_in, MCode:MicroCode|Bs_in, AB[24], AB[27],           ;
-;                          ;                           ; AB[26], AB[25], AB[28], AB[39], AB[38], AB[37], AB[36], AB[35], AB[34], AB[33], AB[32], AB[31], AB[30], ;
-;                          ;                           ; AB[29], MCode:MicroCode|ALUOpL                                                                          ;
-; MCode:MicroCode|BPd_in   ; Stuck at GND              ; BP[0], MCode:MicroCode|Ad_in, MCode:MicroCode|Aa_in, AB[0], AB[3], AB[2], AB[1], AB[4], AB[23],         ;
-;                          ; due to stuck port data_in ; AB[22], AB[21], AB[20], AB[19], AB[18], AB[17], AB[16], AB[15], AB[14], AB[13], AB[12], AB[11], AB[10], ;
-;                          ;                           ; AB[9], AB[8], AB[7], AB[6], AB[5]                                                                       ;
-; MCode:MicroCode|FR_in    ; Stuck at GND              ; FR[13], FR[10], FR[4], FR[0], FR[11], MCode:MicroCode|ALUOp[1], FR[12]                                  ;
-;                          ; due to stuck port data_in ;                                                                                                         ;
-; MCode:MicroCode|CSd_in   ; Stuck at GND              ; CS[0]                                                                                                   ;
-;                          ; due to stuck port data_in ;                                                                                                         ;
-+--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                          ;
++--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
+; Register name            ; Reason for Removal        ; Registers Removed due to This Register                                                                        ;
++--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
+; MCode:MicroCode|Set_S[2] ; Stuck at GND              ; CS[31], CS[30], CS[29], CS[28], CS[27], CS[26], CS[25], CS[24], CS[23], CS[22], CS[21], CS[20], CS[19],       ;
+;                          ; due to stuck port data_in ; CS[18], CS[17], CS[16], CS[15], CS[14], CS[13], CS[12], CS[11], CS[10], CS[9], CS[8], CS[7], CS[6], CS[5],    ;
+;                          ;                           ; CS[4], CS[3], CS[2], CS[1], CS[0], DS[31], DS[30], DS[29], DS[28], DS[27], DS[26], DS[25], DS[24], DS[23],    ;
+;                          ;                           ; DS[22], DS[21], DS[20], DS[19], DS[18], DS[17], DS[16], DS[15], DS[14], DS[13], DS[12], DS[11], DS[10],       ;
+;                          ;                           ; DS[9], DS[8], DS[7], DS[6], DS[5], DS[4], DS[3], DS[2], DS[1], DS[0], ES[31], ES[30], ES[29], ES[28], ES[27], ;
+;                          ;                           ; ES[26], ES[25], ES[24], ES[23], ES[22], ES[21], ES[20], ES[19], ES[18], ES[17], ES[16], ES[15], ES[14],       ;
+;                          ;                           ; ES[13], ES[12], ES[11], ES[10], ES[9], ES[8], ES[7], ES[6], ES[5], ES[4], ES[3], ES[2], ES[1], ES[0], FS[31], ;
+;                          ;                           ; FS[30], FS[29], FS[28], FS[27], FS[26], FS[25], FS[24], FS[23], FS[22], FS[21], FS[20], FS[19], FS[18],       ;
+;                          ;                           ; FS[17], FS[16], FS[15], FS[14], FS[13], FS[12], FS[11], FS[10], FS[9], FS[8], FS[7], FS[6], FS[5], FS[4],     ;
+;                          ;                           ; FS[3], FS[2], FS[1], FS[0], GS[31], GS[30], GS[29], GS[28], GS[27], GS[26], GS[25], GS[24], GS[23], GS[22],   ;
+;                          ;                           ; GS[21], GS[20], GS[19], GS[18], GS[17], GS[16], GS[15], GS[14], GS[13], GS[12], GS[11], GS[10], GS[9],        ;
+;                          ;                           ; GS[8], GS[7], GS[6], GS[5], GS[4], GS[3], GS[2], GS[1], GS[0], SS[31], SS[30], SS[29], SS[28], SS[27],        ;
+;                          ;                           ; SS[26], SS[25], SS[24], SS[23], SS[22], SS[21], SS[20], SS[19], SS[18], SS[17], SS[16], SS[15], SS[14],       ;
+;                          ;                           ; SS[13], SS[12], SS[11], SS[10], SS[9], SS[8], SS[7], SS[6], SS[5], SS[4], SS[3], SS[2], SS[1], SS[0]          ;
+; MCode:MicroCode|LMRC[1]  ; Stuck at VCC              ; HPIA[31], HPIA[30], HPIA[29], HPIA[28], HPIA[27], HPIA[26], HPIA[25], HPIA[24], HPIA[23], HPIA[22],           ;
+;                          ; due to stuck port data_in ; HPIA[21], HPIA[20], HPIA[19], HPIA[18], HPIA[17], HPIA[16], HPIA[15], HPIA[14], HPIA[13], HPIA[12],           ;
+;                          ;                           ; HPIA[11], HPIA[10], HPIA[9], HPIA[8], HPIA[7], HPIA[6], HPIA[5], HPIA[4], HPIA[3], HPIA[2], HPIA[1],          ;
+;                          ;                           ; HPIA[0], MPIA[31], MPIA[30], MPIA[29], MPIA[28], MPIA[27], MPIA[26], MPIA[25], MPIA[24], MPIA[23],            ;
+;                          ;                           ; MPIA[22], MPIA[21], MPIA[20], MPIA[19], MPIA[18], MPIA[17], MPIA[16], MPIA[15], MPIA[14], MPIA[13],           ;
+;                          ;                           ; MPIA[12], MPIA[11], MPIA[10], MPIA[9], MPIA[8], MPIA[7], MPIA[6], MPIA[5], MPIA[4], MPIA[3], MPIA[2],         ;
+;                          ;                           ; MPIA[1], MPIA[0], LPIA[31], LPIA[30], LPIA[29], LPIA[28], LPIA[27], LPIA[26], LPIA[25], LPIA[24],             ;
+;                          ;                           ; LPIA[23], LPIA[22], LPIA[21], LPIA[20], LPIA[19], LPIA[18], LPIA[17], LPIA[16], LPIA[15], LPIA[14],           ;
+;                          ;                           ; LPIA[13], LPIA[12], LPIA[11], LPIA[10], LPIA[9], LPIA[8], LPIA[7], LPIA[6], LPIA[5], LPIA[4],                 ;
+;                          ;                           ; LPIA[3], LPIA[2], LPIA[1], LPIA[0]                                                                            ;
+; MCode:MicroCode|PCd_in   ; Stuck at GND              ; AB[63], AB[62], AB[61], AB[60], AB[59], AB[58], AB[57], AB[56], AB[55], AB[54], AB[53], AB[52], AB[51],       ;
+;                          ; due to stuck port data_in ; AB[50], AB[49], AB[48], AB[47], AB[46], AB[45], AB[44], AB[43], AB[42], AB[41], AB[40], AB[39], AB[38],       ;
+;                          ;                           ; AB[37], AB[36], AB[35], AB[34], AB[33], AB[32], AB[31], AB[30], AB[29], AB[28], AB[27], AB[26], AB[25],       ;
+;                          ;                           ; AB[24], AB[23], AB[22], AB[21], AB[20], AB[19], AB[18], AB[17], AB[16], AB[15], AB[14], AB[13], AB[12],       ;
+;                          ;                           ; AB[11], AB[10], AB[9], AB[8], AB[7], AB[6], AB[5], AB[4], AB[3], AB[2], AB[1], X[15], X[14], X[13], X[12],    ;
+;                          ;                           ; X[11], X[10], X[9], X[8], X[7], X[6], X[5], X[4], X[3], X[2], X[1], X[0], AB[0]                               ;
+; MCode:MicroCode|FR_in    ; Stuck at GND              ; FR[9]                                                                                                         ;
+;                          ; due to stuck port data_in ;                                                                                                               ;
+; MCode:MicroCode|Set_D[4] ; Stuck at GND              ; data_out[0]                                                                                                   ;
+;                          ; due to stuck port data_in ;                                                                                                               ;
++--------------------------+---------------------------+---------------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -369,210 +358,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 262   ;
+; Total registers                              ; 91    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 33    ;
-; Number of registers using Asynchronous Clear ; 240   ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 88    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 257   ;
+; Number of registers using Clock Enable       ; 84    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------+
-; Inverted Register Statistics                      ;
-+-----------------------------------------+---------+
-; Inverted Register                       ; Fan out ;
-+-----------------------------------------+---------+
-; RstComplete                             ; 7       ;
-; EIR[16]                                 ; 3       ;
-; EIR[24]                                 ; 3       ;
-; EIR[0]                                  ; 2       ;
-; EIR[17]                                 ; 3       ;
-; EIR[25]                                 ; 2       ;
-; EIR[1]                                  ; 2       ;
-; EIR[18]                                 ; 3       ;
-; EIR[26]                                 ; 3       ;
-; EIR[2]                                  ; 2       ;
-; EIR[19]                                 ; 3       ;
-; EIR[27]                                 ; 3       ;
-; EIR[3]                                  ; 2       ;
-; EIR[20]                                 ; 3       ;
-; EIR[28]                                 ; 3       ;
-; EIR[4]                                  ; 2       ;
-; EIR[21]                                 ; 3       ;
-; EIR[29]                                 ; 2       ;
-; EIR[5]                                  ; 2       ;
-; EIR[22]                                 ; 3       ;
-; EIR[30]                                 ; 3       ;
-; EIR[6]                                  ; 2       ;
-; EIR[23]                                 ; 3       ;
-; EIR[31]                                 ; 2       ;
-; EIR[7]                                  ; 2       ;
-; EIR[32]                                 ; 2       ;
-; EIR[8]                                  ; 2       ;
-; EIR[33]                                 ; 1       ;
-; EIR[9]                                  ; 2       ;
-; EIR[34]                                 ; 2       ;
-; EIR[10]                                 ; 2       ;
-; EIR[35]                                 ; 2       ;
-; EIR[11]                                 ; 2       ;
-; EIR[36]                                 ; 2       ;
-; EIR[12]                                 ; 2       ;
-; EIR[37]                                 ; 1       ;
-; EIR[13]                                 ; 2       ;
-; EIR[38]                                 ; 2       ;
-; EIR[14]                                 ; 2       ;
-; EIR[15]                                 ; 2       ;
-; EIR[39]                                 ; 1       ;
-; EIR[40]                                 ; 1       ;
-; EIR[41]                                 ; 1       ;
-; EIR[42]                                 ; 1       ;
-; EIR[43]                                 ; 1       ;
-; EIR[44]                                 ; 1       ;
-; EIR[45]                                 ; 1       ;
-; EIR[46]                                 ; 1       ;
-; EIR[47]                                 ; 1       ;
-; HPIO                                    ; 3       ;
-; MPIO                                    ; 2       ;
-; LPIO                                    ; 2       ;
-; Total number of inverted registers = 52 ;         ;
-+-----------------------------------------+---------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; RstComplete                            ; 7       ;
+; MPIO                                   ; 2       ;
+; HPIO                                   ; 3       ;
+; LPIO                                   ; 2       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
 
 
-+-----------------------------------------------------------------+
-; Registers Packed Into Inferred Megafunctions                    ;
-+----------------------------+-----------------------------+------+
-; Register Name              ; Megafunction                ; Type ;
-+----------------------------+-----------------------------+------+
-; MCode:MicroCode|LMRC[0..3] ; MCode:MicroCode|Mux48_rtl_0 ; ROM  ;
-+----------------------------+-----------------------------+------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |cpu|Address[0]~reg0               ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |cpu|AB[30]                        ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |cpu|AB[23]                        ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |cpu|AB[5]                         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |cpu|IC[0]                         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |cpu|FR[12]                        ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |cpu|AIE[0]                        ;
-; 13:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |cpu|MCode:MicroCode|Set_A[3]      ;
-; 35:1               ; 2 bits    ; 46 LEs        ; 6 LEs                ; 40 LEs                 ; Yes        ; |cpu|MCode:MicroCode|DE            ;
-; 272:1              ; 3 bits    ; 543 LEs       ; 3 LEs                ; 540 LEs                ; Yes        ; |cpu|MCode:MicroCode|ALUOp[0]      ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; Yes        ; |cpu|EIR[16]                       ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; Yes        ; |cpu|EIR[4]                        ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; Yes        ; |cpu|EIR[9]                        ;
-; 6:1                ; 8 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |cpu|EIR[28]                       ;
-; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |cpu|EIR[39]                       ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |cpu|MCode:MicroCode|Mux64         ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |cpu|ALU:ArithmeticLogicUnit|Mux12 ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; No         ; |cpu|ALU:ArithmeticLogicUnit|Mux1  ;
-; 14:1               ; 4 bits    ; 36 LEs        ; 32 LEs               ; 4 LEs                  ; No         ; |cpu|Mux141                        ;
-; 14:1               ; 4 bits    ; 36 LEs        ; 28 LEs               ; 8 LEs                  ; No         ; |cpu|Mux133                        ;
-; 15:1               ; 4 bits    ; 40 LEs        ; 32 LEs               ; 8 LEs                  ; No         ; |cpu|Mux151                        ;
-; 15:1               ; 4 bits    ; 40 LEs        ; 36 LEs               ; 4 LEs                  ; No         ; |cpu|Mux138                        ;
-; 15:1               ; 8 bits    ; 80 LEs        ; 64 LEs               ; 16 LEs                 ; No         ; |cpu|Mux152                        ;
-; 24:1               ; 4 bits    ; 64 LEs        ; 40 LEs               ; 24 LEs                 ; No         ; |cpu|Mux120                        ;
-; 25:1               ; 2 bits    ; 32 LEs        ; 22 LEs               ; 10 LEs                 ; No         ; |cpu|Mux118                        ;
-; 26:1               ; 3 bits    ; 51 LEs        ; 33 LEs               ; 18 LEs                 ; No         ; |cpu|Mux127                        ;
-; 27:1               ; 2 bits    ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; No         ; |cpu|Mux126                        ;
-; 20:1               ; 2 bits    ; 26 LEs        ; 20 LEs               ; 6 LEs                  ; No         ; |cpu|Mux121                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------+
-; Source assignments for MCode:MicroCode|altsyncram:Mux48_rtl_0|altsyncram_3o01:auto_generated ;
-+---------------------------------+--------------------+------+--------------------------------+
-; Assignment                      ; Value              ; From ; To                             ;
-+---------------------------------+--------------------+------+--------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                              ;
-+---------------------------------+--------------------+------+--------------------------------+
-
-
-+-----------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: MCode:MicroCode|altsyncram:Mux48_rtl_0 ;
-+------------------------------------+------------------------------+---------------------+
-; Parameter Name                     ; Value                        ; Type                ;
-+------------------------------------+------------------------------+---------------------+
-; BYTE_SIZE_BLOCK                    ; 8                            ; Untyped             ;
-; AUTO_CARRY_CHAINS                  ; ON                           ; AUTO_CARRY          ;
-; IGNORE_CARRY_BUFFERS               ; OFF                          ; IGNORE_CARRY        ;
-; AUTO_CASCADE_CHAINS                ; ON                           ; AUTO_CASCADE        ;
-; IGNORE_CASCADE_BUFFERS             ; OFF                          ; IGNORE_CASCADE      ;
-; WIDTH_BYTEENA                      ; 1                            ; Untyped             ;
-; OPERATION_MODE                     ; ROM                          ; Untyped             ;
-; WIDTH_A                            ; 4                            ; Untyped             ;
-; WIDTHAD_A                          ; 8                            ; Untyped             ;
-; NUMWORDS_A                         ; 256                          ; Untyped             ;
-; OUTDATA_REG_A                      ; UNREGISTERED                 ; Untyped             ;
-; ADDRESS_ACLR_A                     ; NONE                         ; Untyped             ;
-; OUTDATA_ACLR_A                     ; NONE                         ; Untyped             ;
-; WRCONTROL_ACLR_A                   ; NONE                         ; Untyped             ;
-; INDATA_ACLR_A                      ; NONE                         ; Untyped             ;
-; BYTEENA_ACLR_A                     ; NONE                         ; Untyped             ;
-; WIDTH_B                            ; 1                            ; Untyped             ;
-; WIDTHAD_B                          ; 1                            ; Untyped             ;
-; NUMWORDS_B                         ; 1                            ; Untyped             ;
-; INDATA_REG_B                       ; CLOCK1                       ; Untyped             ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                       ; Untyped             ;
-; RDCONTROL_REG_B                    ; CLOCK1                       ; Untyped             ;
-; ADDRESS_REG_B                      ; CLOCK1                       ; Untyped             ;
-; OUTDATA_REG_B                      ; UNREGISTERED                 ; Untyped             ;
-; BYTEENA_REG_B                      ; CLOCK1                       ; Untyped             ;
-; INDATA_ACLR_B                      ; NONE                         ; Untyped             ;
-; WRCONTROL_ACLR_B                   ; NONE                         ; Untyped             ;
-; ADDRESS_ACLR_B                     ; NONE                         ; Untyped             ;
-; OUTDATA_ACLR_B                     ; NONE                         ; Untyped             ;
-; RDCONTROL_ACLR_B                   ; NONE                         ; Untyped             ;
-; BYTEENA_ACLR_B                     ; NONE                         ; Untyped             ;
-; WIDTH_BYTEENA_A                    ; 1                            ; Untyped             ;
-; WIDTH_BYTEENA_B                    ; 1                            ; Untyped             ;
-; RAM_BLOCK_TYPE                     ; AUTO                         ; Untyped             ;
-; BYTE_SIZE                          ; 8                            ; Untyped             ;
-; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                    ; Untyped             ;
-; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ         ; Untyped             ;
-; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ         ; Untyped             ;
-; INIT_FILE                          ; Processor16Bits.cpu0.rtl.mif ; Untyped             ;
-; INIT_FILE_LAYOUT                   ; PORT_A                       ; Untyped             ;
-; MAXIMUM_DEPTH                      ; 0                            ; Untyped             ;
-; CLOCK_ENABLE_INPUT_A               ; NORMAL                       ; Untyped             ;
-; CLOCK_ENABLE_INPUT_B               ; NORMAL                       ; Untyped             ;
-; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                       ; Untyped             ;
-; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                       ; Untyped             ;
-; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN              ; Untyped             ;
-; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN              ; Untyped             ;
-; ENABLE_ECC                         ; FALSE                        ; Untyped             ;
-; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                        ; Untyped             ;
-; WIDTH_ECCSTATUS                    ; 3                            ; Untyped             ;
-; DEVICE_FAMILY                      ; Cyclone IV E                 ; Untyped             ;
-; CBXI_PARAMETER                     ; altsyncram_3o01              ; Untyped             ;
-+------------------------------------+------------------------------+---------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------+
-; altsyncram Parameter Settings by Entity Instance                                   ;
-+-------------------------------------------+----------------------------------------+
-; Name                                      ; Value                                  ;
-+-------------------------------------------+----------------------------------------+
-; Number of entity instances                ; 1                                      ;
-; Entity Instance                           ; MCode:MicroCode|altsyncram:Mux48_rtl_0 ;
-;     -- OPERATION_MODE                     ; ROM                                    ;
-;     -- WIDTH_A                            ; 4                                      ;
-;     -- NUMWORDS_A                         ; 256                                    ;
-;     -- OUTDATA_REG_A                      ; UNREGISTERED                           ;
-;     -- WIDTH_B                            ; 1                                      ;
-;     -- NUMWORDS_B                         ; 1                                      ;
-;     -- ADDRESS_REG_B                      ; CLOCK1                                 ;
-;     -- OUTDATA_REG_B                      ; UNREGISTERED                           ;
-;     -- RAM_BLOCK_TYPE                     ; AUTO                                   ;
-;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                              ;
-+-------------------------------------------+----------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |cpu|IC[1]                 ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |cpu|AIE[1]                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------+
@@ -590,28 +406,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 65                          ;
-; cycloneiii_ff         ; 262                         ;
-;     CLR               ; 4                           ;
-;     ENA               ; 20                          ;
-;     ENA CLR           ; 204                         ;
-;     ENA CLR SLD       ; 32                          ;
-;     ENA SLD           ; 1                           ;
-;     plain             ; 1                           ;
+; boundary_port         ; 73                          ;
+; cycloneiii_ff         ; 91                          ;
+;     CLR               ; 7                           ;
+;     ENA               ; 3                           ;
+;     ENA CLR           ; 81                          ;
 ; cycloneiii_io_obuf    ; 32                          ;
-; cycloneiii_lcell_comb ; 623                         ;
-;     arith             ; 23                          ;
-;         2 data inputs ; 22                          ;
+; cycloneiii_lcell_comb ; 86                          ;
+;     arith             ; 30                          ;
+;         2 data inputs ; 29                          ;
 ;         3 data inputs ; 1                           ;
-;     normal            ; 600                         ;
+;     normal            ; 56                          ;
+;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 2                           ;
-;         2 data inputs ; 79                          ;
-;         3 data inputs ; 92                          ;
-;         4 data inputs ; 427                         ;
-; cycloneiii_ram_block  ; 4                           ;
+;         2 data inputs ; 14                          ;
+;         3 data inputs ; 15                          ;
+;         4 data inputs ; 24                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 6.00                        ;
-; Average LUT depth     ; 3.72                        ;
+; Max LUT depth         ; 4.00                        ;
+; Average LUT depth     ; 2.06                        ;
 +-----------------------+-----------------------------+
 
 
@@ -630,7 +443,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Oct 14 00:42:30 2020
+    Info: Processing started: Thu Oct 15 00:55:46 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Processor16Bits -c Processor16Bits
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -689,29 +502,16 @@ Info (10041): Inferred latch for "EAB[31]" at cpu.vhd(910) File: C:/Users/pabri/
 Info (12128): Elaborating entity "MCode" for hierarchy "MCode:MicroCode" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 500
 Warning (10541): VHDL Signal Declaration warning at MCode.vhd(61): used implicit default value for signal "Ae_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 61
 Warning (10541): VHDL Signal Declaration warning at MCode.vhd(65): used implicit default value for signal "Be_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 65
+Warning (10631): VHDL Process Statement warning at MCode.vhd(126): inferring latch(es) for signal or variable "ALUOp", which holds its previous value in one or more paths through the process File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Warning (10631): VHDL Process Statement warning at MCode.vhd(126): inferring latch(es) for signal or variable "ALUOpL", which holds its previous value in one or more paths through the process File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Info (10041): Inferred latch for "ALUOpL" at MCode.vhd(126) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Info (10041): Inferred latch for "ALUOp[0]" at MCode.vhd(126) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Info (10041): Inferred latch for "ALUOp[1]" at MCode.vhd(126) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Info (10041): Inferred latch for "ALUOp[2]" at MCode.vhd(126) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
+Info (10041): Inferred latch for "ALUOp[3]" at MCode.vhd(126) File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/MCode.vhd Line: 126
 Info (12128): Elaborating entity "ALU" for hierarchy "ALU:ArithmeticLogicUnit" File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 573
-Warning (10492): VHDL Process Statement warning at ALU.vhd(164): signal "ADC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 164
-Warning (10492): VHDL Process Statement warning at ALU.vhd(245): signal "SBC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 245
-Info (19000): Inferred 1 megafunctions from design logic
-    Info (276031): Inferred altsyncram megafunction from the following design logic: "MCode:MicroCode|Mux48_rtl_0"
-        Info (286033): Parameter OPERATION_MODE set to ROM
-        Info (286033): Parameter WIDTH_A set to 4
-        Info (286033): Parameter WIDTHAD_A set to 8
-        Info (286033): Parameter NUMWORDS_A set to 256
-        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
-        Info (286033): Parameter RAM_BLOCK_TYPE set to AUTO
-        Info (286033): Parameter INIT_FILE set to Processor16Bits.cpu0.rtl.mif
-Info (12130): Elaborated megafunction instantiation "MCode:MicroCode|altsyncram:Mux48_rtl_0"
-Info (12133): Instantiated megafunction "MCode:MicroCode|altsyncram:Mux48_rtl_0" with the following parameter:
-    Info (12134): Parameter "OPERATION_MODE" = "ROM"
-    Info (12134): Parameter "WIDTH_A" = "4"
-    Info (12134): Parameter "WIDTHAD_A" = "8"
-    Info (12134): Parameter "NUMWORDS_A" = "256"
-    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
-    Info (12134): Parameter "RAM_BLOCK_TYPE" = "AUTO"
-    Info (12134): Parameter "INIT_FILE" = "Processor16Bits.cpu0.rtl.mif"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_3o01.tdf
-    Info (12023): Found entity 1: altsyncram_3o01 File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/db/altsyncram_3o01.tdf Line: 27
+Warning (10492): VHDL Process Statement warning at ALU.vhd(165): signal "ADC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 165
+Warning (10492): VHDL Process Statement warning at ALU.vhd(246): signal "SBC_Q" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/ALU.vhd Line: 246
 Warning (13039): The following bidirectional pins have no drivers
     Warning (13040): bidirectional pin "Data[0]" has no driver File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 92
     Warning (13040): bidirectional pin "Data[1]" has no driver File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 92
@@ -731,20 +531,21 @@ Warning (13039): The following bidirectional pins have no drivers
     Warning (13040): bidirectional pin "Data[15]" has no driver File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 92
 Info (13000): Registers with preset signals will power-up high File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 316
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "RW" is stuck at GND File: C:/Users/pabri/Desktop/Electronica/16Bit computer project/Programacion del proyecto/FPGA Programming/Processor16Bits/Processor-16Bits/CPU/CPU_Platform/cpu.vhd Line: 88
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 54 registers lost all their fanouts during netlist optimizations.
+Info (17049): 583 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 841 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 191 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 7 input pins
-    Info (21059): Implemented 42 output pins
+    Info (21059): Implemented 50 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 772 logic cells
-    Info (21064): Implemented 4 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
-    Info: Peak virtual memory: 4791 megabytes
-    Info: Processing ended: Wed Oct 14 00:42:50 2020
-    Info: Elapsed time: 00:00:20
+    Info (21061): Implemented 118 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 31 warnings
+    Info: Peak virtual memory: 4780 megabytes
+    Info: Processing ended: Thu Oct 15 00:56:10 2020
+    Info: Elapsed time: 00:00:24
     Info: Total CPU time (on all processors): 00:00:39
 
 

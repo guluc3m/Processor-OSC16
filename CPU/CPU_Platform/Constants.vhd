@@ -35,18 +35,18 @@ package Constants is
 	constant Flag_NT: integer := 14; --Nested Task flag.
 	--Reserved flag
 
-	--constant rstAddress: unsigned(23 downto 0) := "111111111111111111111100";
-	constant rstAddress: unsigned(23 downto 0) := "000000000000000000000000";
+	--constant rstAddress: unsigned(31 downto 0) := "00000000111111111111111111111100";
+	constant rstAddress: unsigned(31 downto 0) := "00000000000000000000000000000000";
 	constant rstFlagRegister: std_logic_vector(15 downto 0) := "0010001000000010";
 
-	constant rstHPIAAddress: std_logic_vector(23 downto 0) := "111111110000000000000000";
-	constant rstMPIAAddress: std_logic_vector(23 downto 0) := "000000001010101000000000";
-	constant rstLPIAAddress: std_logic_vector(23 downto 0) := "000000000000000010101010";
+	constant rstHPIAAddress: std_logic_vector(31 downto 0) := "00000000111111110000000000000000";
+	constant rstMPIAAddress: std_logic_vector(31 downto 0) := "00000000000000001010101000000000";
+	constant rstLPIAAddress: std_logic_vector(31 downto 0) := "00000000000000000000000010101010";
 
-	constant rstCodeSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000001";
-	constant rstDataSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000010";
-	constant rstEDataSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000011";
-	constant rstFDataSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000100";
-	constant rstGDataSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000101";
-	constant rstStackSegmentAddress: std_logic_vector(23 downto 0) := "000000000000000000000110";
+	constant rstCodeSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000001";
+	constant rstDataSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000010";
+	constant rstEDataSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000011";
+	constant rstFDataSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000100";
+	constant rstGDataSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000101";
+	constant rstStackSegmentAddress: std_logic_vector(31 downto 0) := "00000000000000000000000000000110";
 end Constants;

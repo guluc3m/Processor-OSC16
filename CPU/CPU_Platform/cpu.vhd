@@ -88,7 +88,7 @@ entity cpu is
 		RW: out std_logic; --Read/Write signal 0 is reading, 1 is writting
 
 		--Data and Address bus
-		Address: out std_logic_vector(23 downto 0); --To be seen
+		Address: out std_logic_vector(31 downto 0); --To be seen
 		Data: inout std_logic_vector(15 downto 0); --Pretty sure to keep like that
 		DataO: out std_logic_vector(15 downto 0); --For displaying tests on the simulator, Enable for simulation
 
@@ -96,7 +96,7 @@ entity cpu is
 		--IC_Test: out std_logic_vector(1 downto 0);
 		--LIC_Test: out std_logic_vector(1 downto 0);
 		--IR_Test: out std_logic_vector(15 downto 0);
-		--PC_Test: out std_logic_vector(23 downto 0);
+		--PC_Test: out std_logic_vector(31 downto 0);
 		--A_B_Test: out std_logic_vector(23 downto 0);
 		--A_Test: out std_logic_vector(15 downto 0);
 		--B_Test: out std_logic_vector(15 downto 0);
@@ -146,8 +146,8 @@ architecture Behavioral of cpu is
 		--ALU REGISTERS--
 
 		--Registers A and B. Both two registers are used to operate in the ALU, stacked in one register.
-		--The order is 0-23(A), 24-47(B)
-		signal AB: std_logic_vector(47 downto 0);
+		--The order is 0-31(A), 31-63(B)
+		signal AB: std_logic_vector(63 downto 0);
 
 		--Registers Extra A and B. Both two registers are used to save the AB data.
 		--The order is 0-15(A), 16-31(B)
@@ -157,49 +157,49 @@ architecture Behavioral of cpu is
 		signal FR_Out: std_logic_vector(15 downto 0);
 
 		--Alu Output Register. It stores the result of the alu operation.
-		signal AOR: std_logic_vector(23 downto 0);
+		signal AOR: std_logic_vector(31 downto 0);
 
 
 
 		--SEGMENT REGISTERS--
 
 		--Code segment register.
-		signal CS: std_logic_vector(23 downto 0);
+		signal CS: std_logic_vector(31 downto 0);
 
 		--Data segment register.
-		signal DS: std_logic_vector(23 downto 0);
+		signal DS: std_logic_vector(31 downto 0);
 
 		--Extra data segment register.
-		signal ES: std_logic_vector(23 downto 0);
+		signal ES: std_logic_vector(31 downto 0);
 
 		--Extra data 2 segment register
-		signal FS: std_logic_vector(23 downto 0);
+		signal FS: std_logic_vector(31 downto 0);
 
 		--Extra data 3 segment register
-		signal GS: std_logic_vector(23 downto 0);
+		signal GS: std_logic_vector(31 downto 0);
 
 		--Stack segment register.
-		signal SS: std_logic_vector(23 downto 0);
+		signal SS: std_logic_vector(31 downto 0);
 
 
 
 		--STACK REGISTERS--
 
 		--Stack pointer register.
-		signal SP: unsigned(23 downto 0);
+		signal SP: unsigned(31 downto 0);
 
 		--Base stack pointer register.
-		signal BP: unsigned(23 downto 0);
+		signal BP: unsigned(31 downto 0);
 
 
 
 		--INDEX REGISTER--
 
 		--Source index register.
-		signal SI: std_logic_vector(23 downto 0);
+		signal SI: std_logic_vector(31 downto 0);
 
 		--Destination index register.
-		signal DI: std_logic_vector(23 downto 0);
+		signal DI: std_logic_vector(31 downto 0);
 
 
 
@@ -224,7 +224,7 @@ architecture Behavioral of cpu is
 		signal HPIO: std_logic;
 
 		--Hight Priority non maskable Interrupt Address register
-		signal HPIA: std_logic_vector(23 downto 0);
+		signal HPIA: std_logic_vector(31 downto 0);
 
 		--Medium Priority maskable Interrupt
 		signal MPI: std_logic;
@@ -233,7 +233,7 @@ architecture Behavioral of cpu is
 		signal MPIO: std_logic;
 
 		--Medium Priority maskable Interrupt Address register
-		signal MPIA: std_logic_vector(23 downto 0);
+		signal MPIA: std_logic_vector(31 downto 0);
 
 		--Low Priority maskable Interrupt
 		signal LPI: std_logic;
@@ -242,7 +242,7 @@ architecture Behavioral of cpu is
 		signal LPIO: std_logic;
 
 		--Low Priority maskable Interrupt Address register
-		signal LPIA: std_logic_vector(23 downto 0);
+		signal LPIA: std_logic_vector(31 downto 0);
 
 		--Actual Interrupt being Executed
 		-- 00 -> No interrupt, 01 -> LPI, 10 -> MPI, 11 -> HPI
@@ -256,23 +256,23 @@ architecture Behavioral of cpu is
 		signal D_B: std_logic_vector(15 downto 0);
 
 		--Address bus.
-		signal A_B: std_logic_vector(23 downto 0);
+		signal A_B: std_logic_vector(31 downto 0);
 
 		--Segment bus.
-		signal S_B: std_logic_vector(23 downto 0);
+		signal S_B: std_logic_vector(31 downto 0);
 
 
 
 		--SPECIAL PURPOSE REGISTERS--
 
 		--Program counter register, used to count the next address to acces. Probably having less address space
-		signal PC: unsigned(23 downto 0); --23 is to change
+		signal PC: unsigned(31 downto 0);
 
 		--Instruccion register. It stores the instruccion recived, that needs to be decoded
 		signal IR: std_logic_vector(15 downto 0);
 
 		--Extra instruccion register
-		signal EIR: std_logic_vector(47 downto 0);
+		signal EIR: std_logic_vector(47 downto 0); -- to change
 
 		--Complete instruccion recived
 		signal CIR: std_logic;
@@ -388,7 +388,7 @@ architecture Behavioral of cpu is
 		--Alu Operation register. It stores the next operation to perform.
 		signal ALUOp: std_logic_vector(3 downto 0); -- See AluOperations
 
-		--Alu Operation Leghth register. It stores if the alu is going to perform a 16 bit operation or a 24 bit operation
+		--Alu Operation Leghth register. It stores if the alu is going to perform a 16 bit operation or a 32 bit operation
 		signal ALUOpL: std_logic;
 
 
@@ -575,8 +575,8 @@ begin
 			clk => clk,
 			Op => ALUOp,
 			OpL => ALUOpL,
-			A => AB(23 downto 0),
-			B => AB(47 downto 24),
+			A => AB(31 downto 0),
+			B => AB(63 downto 32),
 			FR_I => FR,
 			FR_O => FR_Out,
 			Q => AOR);
@@ -607,8 +607,8 @@ begin
 
 						if AIE = "00" then --Try to move upwards when we test its working
 
-							--Forces to execute the BRK instruccion
-							IR <= "0000000000000000";
+							--Forces to execute the BRK instruccion to jump to the addres of the instruction
+							IR <= (others => '0');
 
 							--Setting the interrupt that is going to be executed
 							if HPI = '1' then
@@ -651,7 +651,7 @@ begin
 
 				--Stack pointer set to the data bus
 				if SPd_in = '1' then
-					SP <= "00000000" & unsigned(D_B);
+					SP <= "0000000000000000" & unsigned(D_B);
 				end if;
 
 				--Stack pointer set to the address bus
@@ -671,7 +671,7 @@ begin
 
 				--Base pointer set to the data bus
 				if BPd_in = '1' then
-					BP <= "00000000" & unsigned(D_B);
+					BP <= "0000000000000000" & unsigned(D_B);
 				end if;
 
 				--Base pointer set to the address bus
@@ -686,7 +686,7 @@ begin
 
 				--Program counter set to the data bus
 				if PCd_in = '1' then
-					PC <= "00000000" & unsigned(D_B);
+					PC <= "0000000000000000" & unsigned(D_B);
 				end if;
 
 				--Program counter set to the address bus
@@ -723,7 +723,7 @@ begin
 
 				--Source index register data bus inputting
 				if SId_in = '1' then
-					SI <= "00000000" & D_B;
+					SI <= "0000000000000000" & D_B;
 				end if;
 
 				--Source index register address bus inputting
@@ -733,7 +733,7 @@ begin
 
 				--Destination index register data bus inputting
 				if DId_in = '1' then
-					DI <= "00000000" & D_B;
+					DI <= "0000000000000000" & D_B;
 				end if;
 
 				--Destination index register address bus inputting
@@ -758,7 +758,7 @@ begin
 
 				--Code segment register data bus inputting
 				if CSd_in = '1' then
-					CS <= "00000000" & D_B;
+					CS <= "0000000000000000" & D_B;
 				end if;
 
 				--Code Segment register address bus inputting
@@ -768,7 +768,7 @@ begin
 
 				--Data segment register data bus inputting
 				if DSd_in = '1' then
-					DS <= "00000000" & D_B;
+					DS <= "0000000000000000" & D_B;
 				end if;
 
 				--Data Segment register address bus inputting
@@ -778,7 +778,7 @@ begin
 
 				--Extra data #1 segment register data bus inputting
 				if ESd_in = '1' then
-					ES <= "00000000" & D_B;
+					ES <= "0000000000000000" & D_B;
 				end if;
 
 				--Extra data #1 segment register address bus inputting
@@ -788,7 +788,7 @@ begin
 
 				--Extra data #2 segment register data bus inputting
 				if FSd_in = '1' then
-					FS <= "00000000" & D_B;
+					FS <= "0000000000000000" & D_B;
 				end if;
 
 				--Extra data #2 segment register address bus inputting
@@ -798,7 +798,7 @@ begin
 
 				--Extra data #3 segment register data bus inputting
 				if GSd_in = '1' then
-					GS <= "00000000" & D_B;
+					GS <= "0000000000000000" & D_B;
 				end if;
 
 				--Extra data #3 segment register address bus inputting
@@ -808,7 +808,7 @@ begin
 
 				--Stack segment register data bus inputting
 				if SSd_in = '1' then
-					SS <= "00000000" & D_B;
+					SS <= "0000000000000000" & D_B;
 				end if;
 
 				--Stack segment register address bus inputting
@@ -878,9 +878,9 @@ begin
 					--If we are executing a hardware interrupt break instruction (This is the thing that does not occur during MPI or LPI
 					if AIE = "11" or AIE = "01" or AIE = "10" then
 						case AIE is
-						when "01" => EIR(23 downto 0) <= LPIA;
-						when "10" => EIR(23 downto 0) <= MPIA;
-						when "11" => EIR(23 downto 0) <= HPIA;
+						when "01" => EIR(31 downto 0) <= LPIA;
+						when "10" => EIR(31 downto 0) <= MPIA;
+						when "11" => EIR(31 downto 0) <= HPIA;
 						when others => EIR <= (others => '0');
 						end case;
 						CIR <= '1';
@@ -924,37 +924,37 @@ begin
 
 				--If we are inputting data from the data bus to the A register
 				if Ad_in = '1' then
-					AB(23 downto 0) <= "00000000" & D_B;
+					AB(31 downto 0) <= "0000000000000000" & D_B;
 				end if;
 
 				--If we are inputting data from the address bus to the A register
 				if Aa_in = '1' then
-					AB(23 downto 0) <= A_B;
+					AB(31 downto 0) <= A_B;
 				end if;
 
 				--If we are inputting data from the extra A register to the A register
 				if Ae_in = '1' then
-					AB(23 downto 0) <= "00000000" & EAB(15 downto 0);
+					AB(31 downto 0) <= "0000000000000000" & EAB(15 downto 0);
 				end if;
 
 				--If we are inputting data from the data bus to the B register
 				if Bd_in = '1' then
-					AB(47 downto 24) <= "00000000" & D_B;
+					AB(63 downto 32) <= "0000000000000000" & D_B;
 				end if;
 
 				--If we are inputting data from the address bus to the B register
 				if Ba_in = '1' then
-					AB(47 downto 24) <= A_B;
+					AB(63 downto 32) <= A_B;
 				end if;
 
 				--If we are inputting data from the segment bus to the B register
 				if Bs_in = '1' then
-					AB(47 downto 24) <= S_B;
+					AB(63 downto 32) <= S_B;
 				end if;
 
 				--If we are inputting data from the extra B register to the B register
 				if Be_in = '1' then
-					AB(47 downto 24) <= "00000000" & EAB(31 downto 16);
+					AB(63 downto 32) <= "0000000000000000" & EAB(31 downto 16);
 				end if;
 
 				--If we are inputting data from the A register to the extra A register
@@ -964,7 +964,7 @@ begin
 
 				--If we are inputting data from the B register to the extra B register
 				if EB_in = '1' then
-					EAB(31 downto 16) <= AB(39 downto 24);
+					EAB(31 downto 16) <= AB(47 downto 32);
 				end if;
 
 				--If we are inputting data from the data bus to the FR register
@@ -1061,7 +1061,7 @@ begin
 	with Set_D select
 		D_B <= FR when "00001", 
 		AB(15 downto 0) when "00010",
-		AB(39 downto 24) when "00011",
+		AB(47 downto 32) when "00011",
 		AOR(15 downto 0) when "00100",
 		IR when "00101",
 		std_logic_vector(PC(15 downto 0)) when "00110",
@@ -1092,8 +1092,8 @@ begin
 	--Selecting what is going to be exporting data to the address bus
 	with Set_A select
 		A_B <= std_logic_vector(PC) when "0001",
-		AB(23 downto 0) when "0010",
-		AB(47 downto 24) when "0011",
+		AB(31 downto 0) when "0010",
+		AB(63 downto 32) when "0011",
 		AOR when "0100",
 		std_logic_vector(SP) when "0101",
 		std_logic_vector(BP) when "0110",
@@ -1102,9 +1102,9 @@ begin
 		HPIA when "1001",
 		MPIA when "1010",
 		LPIA when "1011",
-		EIR(23 downto 0) when "1100", --EIR(31 downto 0) when "1100",
-		EIR(47 downto 24) when "1101",
-		EIR(39 downto 16) when "1110",
+		EIR(31 downto 0) when "1100", --EIR(31 downto 0) when "1100",
+		--EIR(47 downto 24) when "1101", --TODO fix
+		--EIR(39 downto 16) when "1110", --TODO fix
 		Address when "1111",
 		(others => '0') when others; -- Tied to ground
 

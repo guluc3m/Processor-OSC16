@@ -57,12 +57,12 @@ entity ALU is
 		clk   : in std_logic;
 
 		Op    : in std_logic_vector(3 downto 0); --Operator selector
-		OpL   : in std_logic; --Operands lenght (0 = 16, 1 = 24) --32
-		A     : in std_logic_vector(23 downto 0); --A operand
-		B     : in std_logic_vector(23 downto 0); --B operand
+		OpL   : in std_logic; --Operands lenght (0 = 16, 1 = 32)
+		A     : in std_logic_vector(31 downto 0); --A operand
+		B     : in std_logic_vector(31 downto 0); --B operand
 		FR_I  : in std_logic_vector(15 downto 0); --Flag register in
 		FR_O  : out std_logic_vector(15 downto 0); --Flag register out);
-		Q     : out std_logic_vector(23 downto 0)); --Output
+		Q     : out std_logic_vector(31 downto 0)); --Output
 end ALU;
 
 architecture Behavioral of ALU is
@@ -75,7 +75,7 @@ architecture Behavioral of ALU is
 	signal ADC_N : std_logic; --Adder negative flag
 	signal ADC_P : std_logic; --Adder parity flag
 	signal ADC_A : std_logic; --Adder adjust/auxiliary_carry flag
-	signal ADC_Q : unsigned(23 downto 0); --Adder result
+	signal ADC_Q : unsigned(31 downto 0); --Adder result
 
 	signal SBC_Z : std_logic; --Substracter zero flag
 	signal SBC_C : std_logic; --Substracter carry flag
@@ -83,15 +83,15 @@ architecture Behavioral of ALU is
 	signal SBC_N : std_logic; --Substracter negative flag
 	signal SBC_P : std_logic; --Substracter parity flag
 	signal SBC_A : std_logic; --Substracter adjust/auxiliary_carry flag
-	signal SBC_Q : unsigned(23 downto 0); --Substracter result
+	signal SBC_Q : unsigned(31 downto 0); --Substracter result
 
 begin
 	
 	--Addition process
 	process(FR_I, A, B, OpL)
 		variable LSBAddition: unsigned(5 downto 0); --(Carry, data ... data, extra carry)
-		variable MSBAddition: unsigned(21 downto 0); --(Carry, data ... data, extra carry)
-		variable AdditionResult: unsigned(24 downto 0); --Result of the addition of A and B
+		variable MSBAddition: unsigned(29 downto 0); --(Carry, data ... data, extra carry)
+		variable AdditionResult: unsigned(32 downto 0); --Result of the addition of A and B (Carry, data)
 		variable temp_parity : std_logic := '1'; --Temporal variable to store the parity when calculating, the total parity
 
 	begin
@@ -102,14 +102,15 @@ begin
 		else
 			LSBAddition := unsigned('0' & A(3 downto 0) & '0') + unsigned('0' & B(3 downto 0) & '1');
 		end if;
-		MSBAddition := unsigned('0' & A(23 downto 4) & LSBAddition(5)) + unsigned('0' & B(23 downto 4) & '1');
+		MSBAddition := unsigned('0' & A(31 downto 4) & LSBAddition(5)) + unsigned('0' & B(31 downto 4) & '1');
 
-		AdditionResult := MSBAddition(21 downto 1) & LSBAddition(4 downto 1);
+		AdditionResult := MSBAddition(29 downto 1) & LSBAddition(4 downto 1);
 
 		-- pragma translate_off
 			if is_x(std_logic_vector(AdditionResult)) then AdditionResult := (others => '0'); end if; --Testing if std_logic_vector is 'X'
 		-- pragma translate_on
 
+		--If the operation is 16 bits
 		if OpL = '0' then
 
 			--Checking carry flag
@@ -129,29 +130,29 @@ begin
 			ADC_V <= (AdditionResult(15) xor A(15)) and not (A(15) xor B(15));
 
 			--Saving the result of the addition
-			ADC_Q <= "00000000" & AdditionResult(15 downto 0);
+			ADC_Q <= "0000000000000000" & AdditionResult(15 downto 0);
 
-		--If the operation is 24 bit
+		--If the operation is 32 bits
 		else
 
 			--Checking carry flag
-			ADC_C <= AdditionResult(24);
+			ADC_C <= AdditionResult(32);
 
 			--Checking zero flag
-			if AdditionResult(23 downto 0) = 0 then
+			if AdditionResult(31 downto 0) = 0 then
 				ADC_Z <= '1';
 			else
 				ADC_Z <= '0';
 			end if;
 
 			--Checking negative flag
-			ADC_N <= AdditionResult(23);
+			ADC_N <= AdditionResult(31);
 
 			--Checking overflow flag
-			ADC_V <= (AdditionResult(23) xor A(23)) and not (A(23) xor B(23));
+			ADC_V <= (AdditionResult(31) xor A(31)) and not (A(31) xor B(31));
 
 			--Saving the result of the addition
-			ADC_Q <= AdditionResult(23 downto 0);
+			ADC_Q <= AdditionResult(31 downto 0);
 
 		end if;
 
@@ -170,8 +171,8 @@ begin
 	--Substraction process
 	process(FR_I, A, B, OpL)
 		variable LSBSubstraction: unsigned(5 downto 0); --(Carry, data ... data, extra carry)
-		variable MSBSubstraction: unsigned(21 downto 0); --(Carry, data ... data, extra carry)
-		variable SubstractionResult: unsigned(24 downto 0); --Result of the substraction of A and B
+		variable MSBSubstraction: unsigned(29 downto 0); --(Carry, data ... data, extra carry)
+		variable SubstractionResult: unsigned(32 downto 0); --Result of the substraction of A and B (Carry, data)
 		variable temp_parity : std_logic := '1'; --Temporal variable to store the parity when calculating, the total parity
 
 	begin
@@ -182,15 +183,15 @@ begin
 		else
 			LSBSubstraction := unsigned('0' & A(3 downto 0) & '0') - unsigned('0' & B(3 downto 0) & '0');
 		end if;
-		MSBSubstraction := unsigned('0' & A(23 downto 4) & '0') - unsigned('0' & B(23 downto 4) & LSBSubstraction(5));
+		MSBSubstraction := unsigned('0' & A(31 downto 4) & '0') - unsigned('0' & B(31 downto 4) & LSBSubstraction(5));
 
-		SubstractionResult := MSBSubstraction(21 downto 1) & LSBSubstraction(4 downto 1);
+		SubstractionResult := MSBSubstraction(29 downto 1) & LSBSubstraction(4 downto 1);
 
 		-- pragma translate_off
 			if is_x(std_logic_vector(SubstractionResult)) then SubstractionResult := (others => '0'); end if; --Testing if std_logic_vector is 'X'
 		-- pragma translate_on
 
-		--If the operation is 16 bit
+		--If the operation is 16 bits
 		if OpL = '0' then
 
 			--Checking carry flag
@@ -210,29 +211,29 @@ begin
 			SBC_V <= (SubstractionResult(15) xor A(15)) and not (A(15) xor not B(15));
 
 			--Saving the result of the addition
-			SBC_Q <= "00000000" & SubstractionResult(15 downto 0);
+			SBC_Q <= "0000000000000000" & SubstractionResult(15 downto 0);
 
-		--If the operation is 24 bit
+		--If the operation is 32 bits
 		else
 
 			--Checking carry flag
-			SBC_C <= SubstractionResult(24);
+			SBC_C <= SubstractionResult(32);
 
 			--Checking zero flag
-			if SubstractionResult(23 downto 0) = 0 then
+			if SubstractionResult(31 downto 0) = 0 then
 				SBC_Z <= '1';
 			else
 				SBC_Z <= '0';
 			end if;
 
 			--Checking negative flag
-			SBC_N <= SubstractionResult(23);
+			SBC_N <= SubstractionResult(31);
 
 			--Checking overflow flag
-			SBC_V <= (SubstractionResult(23) xor A(23)) and not (A(23) xor B(23));
+			SBC_V <= (SubstractionResult(31) xor A(31)) and not (A(31) xor B(31));
 
 			--Saving the result of the substraction
-			SBC_Q <= SubstractionResult(23 downto 0);
+			SBC_Q <= SubstractionResult(31 downto 0);
 
 		end if;
 
@@ -252,7 +253,7 @@ begin
 			ADC_Z, ADC_C, ADC_V, ADC_N, ADC_Q, ADC_P, ADC_A,
 			SBC_Z, SBC_C, SBC_V, SBC_N, SBC_Q, SBC_P, SBC_A)
 
-		variable Q_t : unsigned(24 downto 0);
+		variable Q_t : unsigned(32 downto 0);
 		variable temp_parity : std_logic := '1';
 
 	begin
@@ -277,108 +278,108 @@ begin
 		when "0011" =>
 			-- SLL
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "00000000" & unsigned(A(15 downto 0) & '0');
+				Q_t := "0000000000000000" & unsigned(A(15 downto 0) & '0');
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := unsigned(A(23 downto 0) & '0');
+				Q_t := unsigned(A(31 downto 0) & '0');
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
 		when "0100" =>
 			-- SRL
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "00000000" & unsigned(A(0) & '0' & A(15 downto 1));
+				Q_t := "0000000000000000" & unsigned(A(0) & '0' & A(15 downto 1));
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := unsigned(A(0) & '0' & A(23 downto 1));
+				Q_t := unsigned(A(0) & '0' & A(31 downto 1));
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
 		when "0101" =>
 			-- SLA
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "00000000" & unsigned(A(15 downto 0) & '0');
+				Q_t := "0000000000000000" & unsigned(A(15 downto 0) & '0');
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := unsigned(A(23 downto 0) & '0');
+				Q_t := unsigned(A(31 downto 0) & '0');
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
 		when "0110" =>
 			-- SRA
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "00000000" & unsigned(A(0) & A(15) & A(15 downto 1));
+				Q_t := "0000000000000000" & unsigned(A(0) & A(15) & A(15 downto 1));
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := unsigned(A(0) & A(23) & A(23 downto 1));
+				Q_t := unsigned(A(0) & A(31) & A(31 downto 1));
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
 		when "0111" =>
 			-- ROL
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "000000000" & unsigned(A(14 downto 0) & A(15));
+				Q_t := "00000000000000000" & unsigned(A(14 downto 0) & A(15));
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := '0' & unsigned(A(22 downto 0) & A(23));
+				Q_t := '0' & unsigned(A(30 downto 0) & A(31));
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
 		when "1000" =>
 			-- ROR
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
-				Q_t := "000000000" & unsigned(A(0) & A(15 downto 1));
+				Q_t := "00000000000000000" & unsigned(A(0) & A(15 downto 1));
 				if FR_I(Flag_F) = '1' then
 					FR_O(Flag_C) <= Q_t(16);
 				end if;
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := '0' & unsigned(A(0) & A(23 downto 1));
+				Q_t := '0' & unsigned(A(0) & A(31 downto 1));
 				if FR_I(Flag_F) = '1' then
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 				end if;
 			end if;
 
@@ -387,7 +388,7 @@ begin
 			Q_t := unsigned('0' & A) + 1;
 			if FR_I(Flag_F) = '1' then
 
-				--If the operation is 16 bit
+				--If the operation is 16 bits
 				if OpL = '0' then
 					--Checking carry flag
 					FR_O(Flag_C) <= Q_t(16);
@@ -395,13 +396,13 @@ begin
 					--Checking overflow flag
 					FR_O(Flag_V) <= (Q_t(15) xor A(15)) and not A(15);
 
-				--If the operation is 24 bit
+				--If the operation is 32 bits
 				else
 					--Checking carry flag
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 
 					--Checking overflow flag
-					FR_O(Flag_V) <= (Q_t(23) xor A(23)) and not A(23);
+					FR_O(Flag_V) <= (Q_t(31) xor A(31)) and not A(31);
 				end if;
 			end if;
 
@@ -418,7 +419,7 @@ begin
 			Q_t := unsigned('0' & A) - 1;
 			if FR_I(Flag_F) = '1' then
 
-				--If the operation is 16 bit
+				--If the operation is 16 bits
 				if OpL = '0' then
 					--Checking carry flag
 					FR_O(Flag_C) <= Q_t(16);
@@ -426,13 +427,13 @@ begin
 					--Checking overflow flag
 					FR_O(Flag_V) <= (Q_t(15) xor A(15)) and not (A(15) xor '1');
 
-				--If the operation is 24 bit
+				--If the operation is 32 bits
 				else
 					--Checking carry flag
-					FR_O(Flag_C) <= Q_t(24);
+					FR_O(Flag_C) <= Q_t(32);
 
 					--Checking overflow flag
-					FR_O(Flag_V) <= (Q_t(23) xor A(23)) and not (A(23) xor '1');
+					FR_O(Flag_V) <= (Q_t(31) xor A(31)) and not (A(31) xor '1');
 				end if;
 			end if;
 
@@ -447,13 +448,13 @@ begin
 		when "1101" => --Absolute value of A (A must be signed) (1 => 1, -3 => 3) 101 (-3) => 011(3) 111 (-1)
 			-- ABS
 
-			--If the operation is 16 bit
+			--If the operation is 16 bits
 			if OpL = '0' then
 				Q_t := unsigned(A(15) & std_logic_vector(unsigned(not A) + 1)); --Reversing the two's complement
 
-			--If the operation is 24 bit
+			--If the operation is 32 bits
 			else
-				Q_t := unsigned(A(23) & std_logic_vector(unsigned(not A) + 1)); --Reversing the two's complement
+				Q_t := unsigned(A(31) & std_logic_vector(unsigned(not A) + 1)); --Reversing the two's complement
 			end if;
 
 		--From signed to unsigned and from unsigned to signed conversion is automatically done
@@ -487,11 +488,11 @@ begin
 
 				temp_parity := '1';
 
-				--If the operation is 16 bit
+				--If the operation is 16 bits
 				if OpL = '0' then
 
 					--Checking zero flag
-					if Q_t(15 downto 0) = "0000000000000000" then
+					if Q_t(15 downto 0) = "0000000000000000" then --TODO change to others
 						FR_O(Flag_Z) <= '1';
 					else
 						FR_O(Flag_Z) <= '0';
@@ -505,23 +506,23 @@ begin
 					--Checking negative flag
 					FR_O(Flag_N) <= Q_t(15);
 
-				--If the operation is 24 bit
+				--If the operation is 32 bits
 				else
 
 					--Checking zero flag
-					if Q_t(23 downto 0) = "000000000000000000000000" then
+					if Q_t(31 downto 0) = "00000000000000000000000000000000" then --TODO change to others
 						FR_O(Flag_Z) <= '1';
 					else
 						FR_O(Flag_Z) <= '0';
 					end if;
 
 					--Checking parity flag
-					for i in Q_t(23 downto 0)'range loop
+					for i in Q_t(31 downto 0)'range loop
 						temp_parity := temp_parity xor Q_t(i);
 					end loop;
 
 					--Checking negative flag
-					FR_O(Flag_N) <= Q_t(23);
+					FR_O(Flag_N) <= Q_t(31);
 				end if;
 
 				--Saving parity flag
@@ -529,7 +530,7 @@ begin
 			end if;
 		end case;
 		
-		Q <= std_logic_vector(Q_t(23 downto 0));
+		Q <= std_logic_vector(Q_t(31 downto 0));
 	end process;
 
 end Behavioral;
