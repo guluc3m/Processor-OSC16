@@ -1,4 +1,4 @@
 --TODO REPORT--
 --- DATE ---- SUMMARY ----
     14/10/20  Check the EIR, becuse with the recent 32 bit address changes it has stopped being good designed
-    14/10/20  Add the 32bit implementation to the ALU.vhd
+    14/10/20  Write a guide to instalation and configuration of quartus lte prime
