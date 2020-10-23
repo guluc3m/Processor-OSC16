@@ -1,0 +1,22 @@
+
+### MOVE INSTRUCTION ###
+
+- Configuration(A <- reg), Instruction Words(1), Memory Access(false), LIC(0), LMRC(10)
+	#0 -> SetLIC, Fix Data Bus to [reg]
+	#1 -> Fix A to Data Bus
+
+- Configuration(B <- reg), Instruction Words(1), Memory Access(false), LIC(0), LMRC(10)
+	#0 -> SetLIC, Fix Data Bus to [reg]
+	#1 -> Fix B to Data Bus
+
+- Configuration(reg <- B), Instruction Words(1), Memory Access(false), LIC(0), LMRC(10)
+	#0 -> SetLIC, Fix Data Bus to B
+	#1 -> Fix reg to Data Bus
+
+- Configuration(reg2 <- reg1), Instruction Words(2), Memory Access(true), LIC(1), LMRC(10)
+	#0 -> SetLIC, Fix Data Bus to reg2 (Background -> Reading EIR(15 downto 0)) //TODO, whith the possible new method of reading memory
+	#1 -> Fix reg1 to data bus
+
+- Configuration(reg), Instruction Words(1), Memory Access(false), LIC(0), LMRC()
+	#0 -> SetLIC, use switch case to determine the src reg, fix Data Bus to src
+	#1 -> Use switch to determine dest reg, fix dest reg to data bus

@@ -3,3 +3,6 @@
     14/10/20  Check the EIR, becuse with the recent 32 bit address changes it has stopped being good designed
     14/10/20  Write a guide to instalation and configuration of quartus lte prime
     19/10/20  Make available the direct fixing of the register to be used to the set_X register of the busses
+    19/10/20  Make a way of inputting the bus to a register knowing its identification number
+    19/10/20  Make a way in which EIR can be readed while the data bus is free, to ba able to use it while in the blackground is reading EIR
+    23/10/20  Separate 32bits register and 16bits registers instructions LOAD MOVE STORE
