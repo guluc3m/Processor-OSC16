@@ -32,7 +32,7 @@ package Constants is
 	constant Flag_V : integer := 11; --oVerflow flag, is set to 1 if the result of the last operation produced a overflow.
 	constant Flag_N : integer := 12; --Negative flag, is set to 1 if the result of the last operation produced a negative number.
 	constant Flag_F : integer := 13; --Flag flag (If enabled, the computer would be able to save new information in the flgas register)
-	constant Flag_NT: integer := 14; --Nested Task flag.
+	--Reserved flag
 	--Reserved flag
 
 	--constant rstAddress: unsigned(31 downto 0) := "00000000111111111111111111111100";

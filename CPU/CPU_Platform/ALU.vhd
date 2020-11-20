@@ -26,8 +26,8 @@
 -- | 1010  |   add   | adds A to B                            | saves all flags                         |
 -- | 1011  |   dec   | decrement, substract 1 form A          | normal carry and overflow in the op     |
 -- | 1100  |   sub   | substracts B from A                    | saves all flags                         |
--- | 1100  |   abs   | absolute value, gets abs from A(signed)| saves in negative flag if A was negative|
--- | 1101  |   nul   | null operator                          | no special flags                        |
+-- | 1100  |   abs   | absolute value, gets abs from A(signed)| saves in negative flag if A was negative| //not one's complement negation
+-- | 1101  |   nul   | null operator                          | no special flags                        | //neg two's complement negation
 -- | 1111  |   nul   | null operator                          | no special flags                        |
 -- |-------|---------|----------------------------------------|-----------------------------------------|
 --
